@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
 /// /////////////////////////////////
 router.get('/demo', async (req, res) => {
   try {
-    const demos = await db.demo.findAll();
+    const demo = await db.demo.findAll();
     const reply = demos.length > 0 ? { data: demos } : { message: 'no results found' };
     res.json(reply);
   } catch (err) {
@@ -40,7 +40,7 @@ router.get('/demo/:demo_id', async (req, res) => {
 });
 
 router.post('/demo', async (req, res) => {
-  const demos = await db.demo.findAll();
+  const demo = await db.demo.findAll();
   const currentId = (await demos.length) + 1;
   try {
     const newDemo = await db.demo.create({
@@ -110,7 +110,7 @@ router.get('/meals', async (req, res) => {
 
 router.get('/pollution/:pollution_id', async (req, res) => {
   try {
-    const meals = await db.Pollution.findAll({
+    const pollution = await db.Pollution.findAll({
       where: {
         pollution_id: req.params.pollution_id
       }
@@ -143,6 +143,8 @@ router.put('/meals', async (req, res) => {
   }
 });
 
+
+
 /// /////////////////////////////////
 /// ////////Development Endpoints/////////
 /// /////////////////////////////////
@@ -158,7 +160,7 @@ router.get('/macros', async (req, res) => {
 
 router.get('/development/:development_id', async (req, res) => {
   try {
-    const meals = await db.Development.findAll({
+    const development = await db.Development.findAll({
       where: {
         development_id: req.params.development_id
       }

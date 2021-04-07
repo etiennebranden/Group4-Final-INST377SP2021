@@ -182,7 +182,7 @@ router.put('/meals', async (req, res) => {
 /// /////////////////////////////////
 router.get('/development', async (req, res) => {
   try {
-    const macros = await db.Macros.findAll();
+    const macros = await db.dev.findAll();
     res.send(development);
   } catch (err) {
     console.error(err);
@@ -321,6 +321,7 @@ router.delete('/environment_conditions/:env_id', async (req, res) => {
     res.error('Server error');
   }
 });
+
 
 /// //////////////////////////////////
 /// ///////Custom SQL Endpoint////////

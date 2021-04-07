@@ -155,7 +155,7 @@ router.delete('/pollution/:pollution_id', async (req, res) => {
   }
 });
 
-router.put('/meals', async (req, res) => {
+router.put('/pollution', async (req, res) => {
   try {
     await db.Meals.update(
       {
@@ -235,7 +235,7 @@ router.delete('/development/:development_id', async (req, res) => {
   }
 });
 
-router.put('/macros', async (req, res) => {
+router.put('/development', async (req, res) => {
   try {
     // N.B. - this is a good example of where to use code validation to confirm objects
     await db.Macros.update(

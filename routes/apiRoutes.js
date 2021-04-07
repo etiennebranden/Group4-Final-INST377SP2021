@@ -96,7 +96,7 @@ router.put('/demo', async (req, res) => {
 */
 
 /// /////////////////////////////////
-/// ////////Meals Endpoints//////////
+/// ////////Pollution Endpoints//////////
 /// /////////////////////////////////
 router.get('/meals', async (req, res) => {
   try {
@@ -108,15 +108,15 @@ router.get('/meals', async (req, res) => {
   }
 });
 
-router.get('/meals/:meal_id', async (req, res) => {
+router.get('/pollution/:pollution_id', async (req, res) => {
   try {
-    const meals = await db.Meals.findAll({
+    const meals = await db.Pollution.findAll({
       where: {
-        meal_id: req.params.meal_id
+        pollution_id: req.params.pollution_id
       }
     });
-    
-    res.json(meals);
+
+    res.json(pollution);
   } catch (err) {
     console.error(err);
     res.error('Server error');
@@ -144,7 +144,7 @@ router.put('/meals', async (req, res) => {
 });
 
 /// /////////////////////////////////
-/// ////////Macros Endpoints/////////
+/// ////////Development Endpoints/////////
 /// /////////////////////////////////
 router.get('/macros', async (req, res) => {
   try {
@@ -156,14 +156,14 @@ router.get('/macros', async (req, res) => {
   }
 });
 
-router.get('/macros/:meal_id', async (req, res) => {
+router.get('/development/:development_id', async (req, res) => {
   try {
-    const meals = await db.Macros.findAll({
+    const meals = await db.Development.findAll({
       where: {
-        meal_id: req.params.meal_id
+        development_id: req.params.development_id
       }
     });
-    res.json(meals);
+    res.json(development);
   } catch (err) {
     console.error(err);
     res.error('Server error');
@@ -199,7 +199,7 @@ router.put('/macros', async (req, res) => {
 });
 
 /// /////////////////////////////////
-/// Dietary Restrictions Endpoints///
+/// Environment Conditions Endpoints///
 /// /////////////////////////////////
 router.get('/restrictions', async (req, res) => {
   try {
@@ -211,19 +211,21 @@ router.get('/restrictions', async (req, res) => {
   }
 });
 
-router.get('/restrictions/:restriction_id', async (req, res) => {
+router.get('/environment_conditions/:env_id', async (req, res) => {
   try {
-    const restrictions = await db.DietaryRestrictions.findAll({
+    const conditions = await db.EnvironmentConditions.findAll({
       where: {
-        restriction_id: req.params.restriction_id
+        env_id: req.params.env_id
       }
     });
-    res.json(restrictions);
+    res.json(conditions);
   } catch (err) {
     console.error(err);
     res.error('Server error');
   }
 });
+
+
 
 /// //////////////////////////////////
 /// ///////Custom SQL Endpoint////////

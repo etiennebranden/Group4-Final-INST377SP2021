@@ -157,7 +157,7 @@ router.delete('/pollution/:pollution_id', async (req, res) => {
 
 router.put('/pollution', async (req, res) => {
   try {
-    await db.Meals.update(
+    await db.pollution.update(
       {
         meal_name: req.body.meal_name,
         meal_category: req.body.meal_category
@@ -192,7 +192,7 @@ router.get('/development', async (req, res) => {
 
 router.get('/development/:development_id', async (req, res) => {
   try {
-    const development = await db.Development.findAll({
+    const development = await db.development.findAll({
       where: {
         development_id: req.params.development_id
       }

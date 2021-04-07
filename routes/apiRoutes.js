@@ -141,6 +141,20 @@ router.post('/pollution', async (req, res) => {
   }
 });
 
+router.delete('/pollution/:pollution_id', async (req, res) => {
+  try {
+    await db.pollution.destroy({
+      where: {
+        pollution_id: req.params.pollution_id
+      }
+    });
+    res.send('Successfully Deleted');
+  } catch (err) {
+    console.error(err);
+    res.error('Server error');
+  }
+});
+
 router.put('/meals', async (req, res) => {
   try {
     await db.Meals.update(
@@ -202,6 +216,19 @@ router.post('/development', async (req, res) => {
       gender_ratio: req.body.gender_ratio
     });
     res.json(newDemo);
+  } catch (err) {
+    console.error(err);
+    res.error('Server error');
+  }
+});
+router.delete('/development/:development_id', async (req, res) => {
+  try {
+    await db.development.destroy({
+      where: {
+        development_id: req.params.development_id
+      }
+    });
+    res.send('Successfully Deleted');
   } catch (err) {
     console.error(err);
     res.error('Server error');
@@ -281,7 +308,19 @@ router.post('/environment_conditions', async (req, res) => {
   }
 });
 
-
+router.delete('/environment_conditions/:env_id', async (req, res) => {
+  try {
+    await db.env_cond.destroy({
+      where: {
+        evnv_id: req.params.env_id
+      }
+    });
+    res.send('Successfully Deleted');
+  } catch (err) {
+    console.error(err);
+    res.error('Server error');
+  }
+});
 
 /// //////////////////////////////////
 /// ///////Custom SQL Endpoint////////

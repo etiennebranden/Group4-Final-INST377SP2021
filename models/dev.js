@@ -1,6 +1,6 @@
 export default (sequelize, DataTypes) => {
-  const development = sequelize.define(
-    'development',
+  const dev = sequelize.define(
+    'dev',
     {
       development_id: {
         type: DataTypes.INTEGER,
@@ -16,5 +16,5 @@ export default (sequelize, DataTypes) => {
     },
     { freezeTableName: true, timestamps: false }
   );
-  return development;
+  return dev;
 };

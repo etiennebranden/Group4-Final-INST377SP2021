@@ -123,6 +123,24 @@ router.get('/pollution/:pollution_id', async (req, res) => {
   }
 });
 
+router.post('/pollution', async (req, res) => {
+  const pollution = await db.pollution.findAll();
+  const currentId = (await pollution.length) + 1;
+  try {
+    const newDemo = await db.pollution.create({
+      pollution_id: currentId,
+      race: req.body.race,
+      religion: req.body.religion,
+      annual_income: req.body.annual_income,
+      gender_ratio: req.body.gender_ratio
+    });
+    res.json(newDemo);
+  } catch (err) {
+    console.error(err);
+    res.error('Server error');
+  }
+});
+
 router.put('/meals', async (req, res) => {
   try {
     await db.Meals.update(
@@ -166,6 +184,24 @@ router.get('/development/:development_id', async (req, res) => {
       }
     });
     res.json(development);
+  } catch (err) {
+    console.error(err);
+    res.error('Server error');
+  }
+});
+
+router.post('/development', async (req, res) => {
+  const development = await db.development.findAll();
+  const currentId = (await development.length) + 1;
+  try {
+    const newDemo = await db.development.create({
+      development_id: currentId,
+      race: req.body.race,
+      religion: req.body.religion,
+      annual_income: req.body.annual_income,
+      gender_ratio: req.body.gender_ratio
+    });
+    res.json(newDemo);
   } catch (err) {
     console.error(err);
     res.error('Server error');
@@ -221,6 +257,24 @@ router.get('/environment_conditions/:env_id', async (req, res) => {
       }
     });
     res.json(conditions);
+  } catch (err) {
+    console.error(err);
+    res.error('Server error');
+  }
+});
+
+router.post('/environment_conditions', async (req, res) => {
+  const environment_conditions = await db.environment_conditions.findAll();
+  const currentId = (await environment_conditions.length) + 1;
+  try {
+    const newDemo = await db.environment_conditions.create({
+      env_id: currentId,
+      race: req.body.race,
+      religion: req.body.religion,
+      annual_income: req.body.annual_income,
+      gender_ratio: req.body.gender_ratio
+    });
+    res.json(newDemo);
   } catch (err) {
     console.error(err);
     res.error('Server error');

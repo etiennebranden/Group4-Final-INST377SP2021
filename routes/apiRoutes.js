@@ -98,10 +98,10 @@ router.put('/demo', async (req, res) => {
 /// /////////////////////////////////
 /// ////////Pollution Endpoints//////////
 /// /////////////////////////////////
-router.get('/meals', async (req, res) => {
+router.get('/pollution', async (req, res) => {
   try {
-    const meals = await db.Meals.findAll();
-    res.json(meals);
+    const pollution = await db.pollution.findAll();
+    res.json(pollution);
   } catch (err) {
     console.error(err);
     res.error('Server error');
@@ -110,7 +110,7 @@ router.get('/meals', async (req, res) => {
 
 router.get('/pollution/:pollution_id', async (req, res) => {
   try {
-    const pollution = await db.Pollution.findAll({
+    const pollution = await db.pollution.findAll({
       where: {
         pollution_id: req.params.pollution_id
       }
@@ -180,10 +180,10 @@ router.put('/meals', async (req, res) => {
 /// /////////////////////////////////
 /// ////////Development Endpoints/////////
 /// /////////////////////////////////
-router.get('/macros', async (req, res) => {
+router.get('/development', async (req, res) => {
   try {
     const macros = await db.Macros.findAll();
-    res.send(macros);
+    res.send(development);
   } catch (err) {
     console.error(err);
     res.error('Server error');
@@ -266,10 +266,10 @@ router.put('/macros', async (req, res) => {
 /// /////////////////////////////////
 /// Environment Conditions Endpoints///
 /// /////////////////////////////////
-router.get('/restrictions', async (req, res) => {
+router.get('/environment_conditions', async (req, res) => {
   try {
-    const restrictions = await db.DietaryRestrictions.findAll();
-    res.json(restrictions);
+    const conditions = await db.environment_conditions.findAll();
+    res.json(environment_conditions);
   } catch (err) {
     console.error(err);
     res.error('Server error');
@@ -278,7 +278,7 @@ router.get('/restrictions', async (req, res) => {
 
 router.get('/environment_conditions/:env_id', async (req, res) => {
   try {
-    const conditions = await db.EnvironmentConditions.findAll({
+    const conditions = await db.environment_conditions.findAll({
       where: {
         env_id: req.params.env_id
       }
@@ -310,7 +310,7 @@ router.post('/environment_conditions', async (req, res) => {
 
 router.delete('/environment_conditions/:env_id', async (req, res) => {
   try {
-    await db.env_cond.destroy({
+    await db.environment_conditions.destroy({
       where: {
         evnv_id: req.params.env_id
       }

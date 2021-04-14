@@ -6,6 +6,6 @@ import environment_conditions from './environment_conditions.js';
 export default {
   demo,
   pollution,
-  development,
-  environment_conditions
+  dev,
+  env_cond
 };

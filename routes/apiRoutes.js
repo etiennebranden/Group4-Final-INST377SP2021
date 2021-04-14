@@ -98,10 +98,10 @@ router.put('/demo', async (req, res) => {
 /// /////////////////////////////////
 /// ////////Pollution Endpoints//////////
 /// /////////////////////////////////
-router.get('/meals', async (req, res) => {
+router.get('/pollution', async (req, res) => {
   try {
-    const meals = await db.Meals.findAll();
-    res.json(meals);
+    const pollution = await db.pollution.findAll();
+    res.json(pollution);
   } catch (err) {
     console.error(err);
     res.error('Server error');
@@ -110,7 +110,7 @@ router.get('/meals', async (req, res) => {
 
 router.get('/pollution/:pollution_id', async (req, res) => {
   try {
-    const pollution = await db.Pollution.findAll({
+    const pollution = await db.pollution.findAll({
       where: {
         pollution_id: req.params.pollution_id
       }
@@ -123,9 +123,41 @@ router.get('/pollution/:pollution_id', async (req, res) => {
   }
 });
 
-router.put('/meals', async (req, res) => {
+router.post('/pollution', async (req, res) => {
+  const pollution = await db.pollution.findAll();
+  const currentId = (await pollution.length) + 1;
   try {
-    await db.Meals.update(
+    const newDemo = await db.pollution.create({
+      pollution_id: currentId,
+      race: req.body.race,
+      religion: req.body.religion,
+      annual_income: req.body.annual_income,
+      gender_ratio: req.body.gender_ratio
+    });
+    res.json(newDemo);
+  } catch (err) {
+    console.error(err);
+    res.error('Server error');
+  }
+});
+
+router.delete('/pollution/:pollution_id', async (req, res) => {
+  try {
+    await db.pollution.destroy({
+      where: {
+        pollution_id: req.params.pollution_id
+      }
+    });
+    res.send('Successfully Deleted');
+  } catch (err) {
+    console.error(err);
+    res.error('Server error');
+  }
+});
+
+router.put('/pollution', async (req, res) => {
+  try {
+    await db.pollution.update(
       {
         meal_name: req.body.meal_name,
         meal_category: req.body.meal_category
@@ -148,10 +180,10 @@ router.put('/meals', async (req, res) => {
 /// /////////////////////////////////
 /// ////////Development Endpoints/////////
 /// /////////////////////////////////
-router.get('/macros', async (req, res) => {
+router.get('/development', async (req, res) => {
   try {
-    const macros = await db.Macros.findAll();
-    res.send(macros);
+    const macros = await db.dev.findAll();
+    res.send(development);
   } catch (err) {
     console.error(err);
     res.error('Server error');
@@ -160,7 +192,7 @@ router.get('/macros', async (req, res) => {
 
 router.get('/development/:development_id', async (req, res) => {
   try {
-    const development = await db.Development.findAll({
+    const development = await db.development.findAll({
       where: {
         development_id: req.params.development_id
       }
@@ -172,7 +204,38 @@ router.get('/development/:development_id', async (req, res) => {
   }
 });
 
-router.put('/macros', async (req, res) => {
+router.post('/development', async (req, res) => {
+  const development = await db.development.findAll();
+  const currentId = (await development.length) + 1;
+  try {
+    const newDemo = await db.development.create({
+      development_id: currentId,
+      race: req.body.race,
+      religion: req.body.religion,
+      annual_income: req.body.annual_income,
+      gender_ratio: req.body.gender_ratio
+    });
+    res.json(newDemo);
+  } catch (err) {
+    console.error(err);
+    res.error('Server error');
+  }
+});
+router.delete('/development/:development_id', async (req, res) => {
+  try {
+    await db.development.destroy({
+      where: {
+        development_id: req.params.development_id
+      }
+    });
+    res.send('Successfully Deleted');
+  } catch (err) {
+    console.error(err);
+    res.error('Server error');
+  }
+});
+
+router.put('/development', async (req, res) => {
   try {
     // N.B. - this is a good example of where to use code validation to confirm objects
     await db.Macros.update(
@@ -203,10 +266,10 @@ router.put('/macros', async (req, res) => {
 /// /////////////////////////////////
 /// Environment Conditions Endpoints///
 /// /////////////////////////////////
-router.get('/restrictions', async (req, res) => {
+router.get('/environment_conditions', async (req, res) => {
   try {
-    const restrictions = await db.DietaryRestrictions.findAll();
-    res.json(restrictions);
+    const conditions = await db.environment_conditions.findAll();
+    res.json(environment_conditions);
   } catch (err) {
     console.error(err);
     res.error('Server error');
@@ -215,7 +278,7 @@ router.get('/restrictions', async (req, res) => {
 
 router.get('/environment_conditions/:env_id', async (req, res) => {
   try {
-    const conditions = await db.EnvironmentConditions.findAll({
+    const conditions = await db.environment_conditions.findAll({
       where: {
         env_id: req.params.env_id
       }
@@ -227,6 +290,37 @@ router.get('/environment_conditions/:env_id', async (req, res) => {
   }
 });
 
+router.post('/environment_conditions', async (req, res) => {
+  const environment_conditions = await db.environment_conditions.findAll();
+  const currentId = (await environment_conditions.length) + 1;
+  try {
+    const newDemo = await db.environment_conditions.create({
+      env_id: currentId,
+      race: req.body.race,
+      religion: req.body.religion,
+      annual_income: req.body.annual_income,
+      gender_ratio: req.body.gender_ratio
+    });
+    res.json(newDemo);
+  } catch (err) {
+    console.error(err);
+    res.error('Server error');
+  }
+});
+
+router.delete('/environment_conditions/:env_id', async (req, res) => {
+  try {
+    await db.environment_conditions.destroy({
+      where: {
+        evnv_id: req.params.env_id
+      }
+    });
+    res.send('Successfully Deleted');
+  } catch (err) {
+    console.error(err);
+    res.error('Server error');
+  }
+});
 
 
 /// //////////////////////////////////

@@ -2,7 +2,7 @@ export default (sequelize, DataTypes) => {
     const dev = sequelize.define(
       'pol_party',
       {
-        development_id: {
+        pol_party_id: {
           type: DataTypes.INTEGER,
           allowNull: false,
           primaryKey: true

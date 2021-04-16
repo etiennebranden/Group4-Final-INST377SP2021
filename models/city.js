@@ -8,7 +8,7 @@ export default (sequelize, DataTypes) => {
           primaryKey: true
         },
         city_name: {
-          type: DataTypes.VARCHAR
+          type: DataTypes.STRING
         },
         city_population: {
             type: DataTypes.INTEGER

@@ -1,6 +1,6 @@
 export default (sequelize, DataTypes) => {
-    const city_join_part = sequelize.define(
-      'city_join_part',
+    const city_join_party = sequelize.define(
+      'city_join_party',
       {
         city_id: {
           type: DataTypes.INTEGER,
@@ -13,7 +13,7 @@ export default (sequelize, DataTypes) => {
             primaryKey: true
         },
         spectrum: {
-          type: DataTypes.ENUM,
+          type: DataTypes.ENUM('Liberal', 'Conservative'),
           allowNull: false
         },
         city_city_id: {
@@ -27,5 +27,5 @@ export default (sequelize, DataTypes) => {
       },
       { freezeTableName: true, timestamps: false }
     );
-    return city_join_part;
+    return city_join_party;
   };

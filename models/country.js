@@ -8,11 +8,11 @@ export default (sequelize, DataTypes) => {
           primaryKey: true
         },
         country_name: {
-          type: DataTypes.VARCHAR,
+          type: DataTypes.STRING,
           allowNull: false
         },
         continent: {
-          type: DataTypes.VARCHAR,
+          type: DataTypes.STRING,
           allowNull: false
         },
         development_development_id: {

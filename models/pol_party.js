@@ -1,5 +1,5 @@
 export default (sequelize, DataTypes) => {
-    const dev = sequelize.define(
+    const pol_party = sequelize.define(
       'pol_party',
       {
         pol_party_id: {
@@ -8,7 +8,7 @@ export default (sequelize, DataTypes) => {
           primaryKey: true
         },
         party_name: {
-          type: DataTypes.VARCHAR
+          type: DataTypes.STRING
         }
       },
       { freezeTableName: true, timestamps: false }

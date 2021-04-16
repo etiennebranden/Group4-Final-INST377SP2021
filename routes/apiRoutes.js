@@ -17,7 +17,7 @@ router.get("/demo", async (req, res) => {
   try {
     const demo = await db.demo.findAll();
     const reply =
-      demos.length > 0 ? { data: demos } : { message: "no results found" };
+      demo.length > 0 ? { data: demo } : { message: "no results found" };
     res.json(reply);
   } catch (err) {
     console.error(err);
@@ -42,7 +42,7 @@ router.get("/demo/:demo_id", async (req, res) => {
 
 router.post("/demo", async (req, res) => {
   const demo = await db.demo.findAll();
-  const currentId = (await demos.length) + 1;
+  const currentId = (await demo.length) + 1;
   try {
     const newDemo = await db.demo.create({
       demo_id: currentId,

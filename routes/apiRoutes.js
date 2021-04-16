@@ -397,6 +397,86 @@ router.delete("/environment_conditions/:env_id", async (req, res) => {
     res.error("Server error");
   }
 });
+/// /////////////////////////////////
+/// City endpoints//////////////////
+/// /////////////////////////////////
+router.get("/city", async (req, res) => {
+  try {
+    const city = await db.city.findAll();
+    res.json(city);
+  } catch (err) {
+    console.error(err);
+    res.error("Server error");
+  }
+});
+
+router.get("/city/:city_id", async (req, res) => {
+  try {
+    const city = await db.city.findAll({
+      where: {
+        city_id: req.params.city_id,
+      },
+    });
+    res.json(city);
+  } catch (err) {
+    console.error(err);
+    res.error("Server error");
+  }
+});
+
+router.post("/city", async (req, res) => {
+  const pol = await db.city.findAll();
+  const currentId = (await city.length) + 1;
+  try {
+    const newDemo = await db.city.create({
+      city_id: currentId,
+      city_name: req.body.city_name,
+    });
+    res.json(newDemo);
+  } catch (err) {
+    console.error(err);
+    res.error("Server error");
+  }
+});
+
+router.delete("/city/:city_name", async (req, res) => {
+  try {
+    await db.city.destroy({
+      where: {
+        city_id: req.params.city_id,
+      },
+    });
+    res.send("Successfully Deleted");
+  } catch (err) {
+    console.error(err);
+    res.error("Server error");
+  }
+});
+
+router.put("/city", async (req, res) => {
+  try {
+    await db.city.update(
+      {
+        city_name: req.body.city_name,
+      },
+      {
+        where: {
+          city_name: req.body.city_name,
+        },
+      }
+    );
+    res.send("City successfully updated");
+  } catch (err) {
+    console.error(err);
+    res.error("Server error");
+  }
+});
+
+
+
+/// /////////////////////////////////
+/// City join party//////////////////
+/// /////////////////////////////////
 
 /// //////////////////////////////////
 /// ///////Custom SQL Endpoint////////

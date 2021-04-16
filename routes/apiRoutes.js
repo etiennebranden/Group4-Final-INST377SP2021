@@ -171,7 +171,7 @@ router.put("/pollution", async (req, res) => {
         },
       }
     );
-    res.send("Meal Successfully Updated");
+    res.send("Successfully Updated");
   } catch (err) {
     console.error(err);
     res.error("Server error");
@@ -247,7 +247,7 @@ router.put("/pol_party", async (req, res) => {
         },
       }
     );
-    res.send("Meal Successfully Updated");
+    res.send("Successfully Updated");
   } catch (err) {
     console.error(err);
     res.error("Server error");

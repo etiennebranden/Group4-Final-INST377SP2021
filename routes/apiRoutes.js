@@ -211,7 +211,7 @@ router.post("/pol_party", async (req, res) => {
   const currentId = (await pol_party.length) + 1;
   try {
     const newDemo = await db.pollution.create({
-      pollution_id: currentId,
+      pol_party_id: currentId,
       party_name: req.body.party_name,
     });
     res.json(newDemo);

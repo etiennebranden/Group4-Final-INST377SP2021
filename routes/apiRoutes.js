@@ -1,93 +1,94 @@
 /* eslint-disable no-console */
-import express from 'express';
-import sequelize from 'sequelize';
+import express from "express";
+import sequelize from "sequelize";
 
-import db from '../database/initializeDB.js';
+import db from "../database/initializeDB.js";
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  res.send('Welcome to the GROUP 4 Air Pollution APP!');
+router.get("/", (req, res) => {
+  res.send("Welcome to the GROUP 4 Air Pollution APP!");
 });
 
 /// /////////////////////////////////
 /// ////Demgraphics Endpoints////////
 /// /////////////////////////////////
-router.get('/demo', async (req, res) => {
+router.get("/demo", async (req, res) => {
   try {
     const demo = await db.demo.findAll();
-    const reply = demos.length > 0 ? { data: demos } : { message: 'no results found' };
+    const reply =
+      demo.length > 0 ? { data: demo } : { message: "no results found" };
     res.json(reply);
   } catch (err) {
     console.error(err);
-    res.error('Server error');
+    res.error("Server error");
   }
 });
 
-router.get('/demo/:demo_id', async (req, res) => {
+router.get("/demo/:demo_id", async (req, res) => {
   try {
     const demo = await db.demo.findAll({
       where: {
-        demo_id: req.params.demo_id
-      }
+        demo_id: req.params.demo_id,
+      },
     });
 
     res.json(demo);
   } catch (err) {
     console.error(err);
-    res.error('Server error');
+    res.error("Server error");
   }
 });
 
-router.post('/demo', async (req, res) => {
+router.post("/demo", async (req, res) => {
   const demo = await db.demo.findAll();
-  const currentId = (await demos.length) + 1;
+  const currentId = (await demo.length) + 1;
   try {
     const newDemo = await db.demo.create({
       demo_id: currentId,
       race: req.body.race,
       religion: req.body.religion,
       annual_income: req.body.annual_income,
-      gender_ratio: req.body.gender_ratio
+      gender_ratio: req.body.gender_ratio,
     });
     res.json(newDemo);
   } catch (err) {
     console.error(err);
-    res.error('Server error');
+    res.error("Server error");
   }
 });
 
-router.delete('/demo/:hall_id', async (req, res) => {
+router.delete("/demo/:hall_id", async (req, res) => {
   try {
     await db.demo.destroy({
       where: {
-        demo_id: req.params.demo_id
-      }
+        demo_id: req.params.demo_id,
+      },
     });
-    res.send('Successfully Deleted');
+    res.send("Successfully Deleted");
   } catch (err) {
     console.error(err);
-    res.error('Server error');
+    res.error("Server error");
   }
 });
 
-router.put('/demo', async (req, res) => {
+router.put("/demo", async (req, res) => {
   try {
     await db.demo.update(
       {
         race: req.body.race,
-        religion: req.body.religion
+        religion: req.body.religion,
       },
       {
         where: {
-          demo_id: req.body.demo_id
-        }
+          demo_id: req.body.demo_id,
+        },
       }
     );
-    res.send('Successfully Updated');
+    res.send("Successfully Updated");
   } catch (err) {
     console.error(err);
-    res.error('Server error');
+    res.error("Server error");
   }
 });
 
@@ -98,99 +99,188 @@ router.put('/demo', async (req, res) => {
 /// /////////////////////////////////
 /// ////////Pollution Endpoints//////////
 /// /////////////////////////////////
-router.get('/meals', async (req, res) => {
+router.get("/pollution", async (req, res) => {
   try {
-    const meals = await db.Meals.findAll();
-    res.json(meals);
+    const pollution = await db.pollution.findAll();
+    res.json(pollution);
   } catch (err) {
     console.error(err);
-    res.error('Server error');
+    res.error("Server error");
   }
 });
 
-router.get('/pollution/:pollution_id', async (req, res) => {
+router.get("/pollution/:pollution_id", async (req, res) => {
   try {
-    const pollution = await db.Pollution.findAll({
+    const pollution = await db.pollution.findAll({
       where: {
-        pollution_id: req.params.pollution_id
-      }
+        pollution_id: req.params.pollution_id,
+      },
     });
 
     res.json(pollution);
   } catch (err) {
     console.error(err);
-    res.error('Server error');
+    res.error("Server error");
   }
 });
 
-router.post('/pollution', async (req, res) => {
+router.post("/pollution", async (req, res) => {
   const pollution = await db.pollution.findAll();
   const currentId = (await pollution.length) + 1;
   try {
     const newDemo = await db.pollution.create({
       pollution_id: currentId,
-      race: req.body.race,
-      religion: req.body.religion,
-      annual_income: req.body.annual_income,
-      gender_ratio: req.body.gender_ratio
+      O3: req.body.O3,
+      PM10: req.body.PM10,
+      SO2: req.body.SO2,
+      NO2: req.body.NO2,
     });
     res.json(newDemo);
   } catch (err) {
     console.error(err);
-    res.error('Server error');
+    res.error("Server error");
   }
 });
 
-router.put('/meals', async (req, res) => {
+router.delete("/pollution/:pollution_id", async (req, res) => {
   try {
-    await db.Meals.update(
+    await db.pollution.destroy({
+      where: {
+        pollution_id: req.params.pollution_id,
+      },
+    });
+    res.send("Successfully Deleted");
+  } catch (err) {
+    console.error(err);
+    res.error("Server error");
+  }
+});
+
+router.put("/pollution", async (req, res) => {
+  try {
+    await db.pollution.update(
       {
-        meal_name: req.body.meal_name,
-        meal_category: req.body.meal_category
+        O3: req.body.O3,
+        PM10: req.body.PM10,
+        SO2: req.body.SO2,
+        NO2: req.body.NO2,
       },
       {
         where: {
-          meal_id: req.body.meal_id
-        }
+          pollution_id: req.body.pollution_id,
+        },
       }
     );
-    res.send('Meal Successfully Updated');
+    res.send("Successfully Updated");
   } catch (err) {
     console.error(err);
-    res.error('Server error');
+    res.error("Server error");
   }
 });
 
+/// /////////////////////////////////
+/// ////////Political Party Endpoints//////////
+/// /////////////////////////////////
+router.get("/pol_party", async (req, res) => {
+  try {
+    const pol = await db.pol_party.findAll();
+    res.json(pol);
+  } catch (err) {
+    console.error(err);
+    res.error("Server error");
+  }
+});
 
+router.get("/pol_party/:pol_party_id", async (req, res) => {
+  try {
+    const pol = await db.pol_party.findAll({
+      where: {
+        pol_party_id: req.params.pol_party_id,
+      },
+    });
 
+    res.json(pol);
+  } catch (err) {
+    console.error(err);
+    res.error("Server error");
+  }
+});
+
+router.post("/pol_party", async (req, res) => {
+  const pol = await db.pol_party.findAll();
+  const currentId = (await pol_party.length) + 1;
+  try {
+    const newDemo = await db.pollution.create({
+      pol_party_id: currentId,
+      party_name: req.body.party_name,
+    });
+    res.json(newDemo);
+  } catch (err) {
+    console.error(err);
+    res.error("Server error");
+  }
+});
+
+router.delete("/pol_party/:pol_party_id", async (req, res) => {
+  try {
+    await db.pol_party.destroy({
+      where: {
+        pol_party_id: req.params.pol_party_id,
+      },
+    });
+    res.send("Successfully Deleted");
+  } catch (err) {
+    console.error(err);
+    res.error("Server error");
+  }
+});
+
+router.put("/pol_party", async (req, res) => {
+  try {
+    await db.pol_party.update(
+      {
+        party_name: req.body.party_name,
+      },
+      {
+        where: {
+          pol_party_id: req.body.pol_party_id,
+        },
+      }
+    );
+    res.send("Successfully Updated");
+  } catch (err) {
+    console.error(err);
+    res.error("Server error");
+  }
+});
 /// /////////////////////////////////
 /// ////////Development Endpoints/////////
 /// /////////////////////////////////
-router.get('/macros', async (req, res) => {
+router.get("/development", async (req, res) => {
   try {
-    const macros = await db.Macros.findAll();
-    res.send(macros);
+    const macros = await db.dev.findAll();
+    res.send(development);
   } catch (err) {
     console.error(err);
-    res.error('Server error');
+    res.error("Server error");
   }
 });
 
-router.get('/development/:development_id', async (req, res) => {
+router.get("/development/:development_id", async (req, res) => {
   try {
-    const development = await db.Development.findAll({
+    const development = await db.development.findAll({
       where: {
-        development_id: req.params.development_id
-      }
+        development_id: req.params.development_id,
+      },
     });
     res.json(development);
   } catch (err) {
     console.error(err);
-    res.error('Server error');
+    res.error("Server error");
   }
 });
 
-router.post('/development', async (req, res) => {
+router.post("/development", async (req, res) => {
   const development = await db.development.findAll();
   const currentId = (await development.length) + 1;
   try {
@@ -199,16 +289,29 @@ router.post('/development', async (req, res) => {
       race: req.body.race,
       religion: req.body.religion,
       annual_income: req.body.annual_income,
-      gender_ratio: req.body.gender_ratio
+      gender_ratio: req.body.gender_ratio,
     });
     res.json(newDemo);
   } catch (err) {
     console.error(err);
-    res.error('Server error');
+    res.error("Server error");
+  }
+});
+router.delete("/development/:development_id", async (req, res) => {
+  try {
+    await db.development.destroy({
+      where: {
+        development_id: req.params.development_id,
+      },
+    });
+    res.send("Successfully Deleted");
+  } catch (err) {
+    console.error(err);
+    res.error("Server error");
   }
 });
 
-router.put('/macros', async (req, res) => {
+router.put("/development", async (req, res) => {
   try {
     // N.B. - this is a good example of where to use code validation to confirm objects
     await db.Macros.update(
@@ -221,49 +324,56 @@ router.put('/macros', async (req, res) => {
         sodium: req.body.sodium,
         carbs: req.body.carbs,
         protein: req.body.protein,
-        fat: req.body.fat
+        fat: req.body.fat,
       },
       {
         where: {
-          meal_id: req.body.meal_id
-        }
+          meal_id: req.body.meal_id,
+        },
       }
     );
-    res.send('Successfully Updated');
+    res.send("Successfully Updated");
   } catch (err) {
     console.error(err);
-    res.error('Server error');
+    res.error("Server error");
   }
 });
 
 /// /////////////////////////////////
 /// Environment Conditions Endpoints///
 /// /////////////////////////////////
+<<<<<<< HEAD
 router.get('/environment_conditions', async (req, res) => {
   try {
     const conditions = await db.EnvironmentConditions.findAll();
     res.json(conditions);
+=======
+router.get("/environment_conditions", async (req, res) => {
+  try {
+    const conditions = await db.environment_conditions.findAll();
+    res.json(environment_conditions);
+>>>>>>> 55e3517cab460bbcddcfb2175fa73d1edc693292
   } catch (err) {
     console.error(err);
-    res.error('Server error');
+    res.error("Server error");
   }
 });
 
-router.get('/environment_conditions/:env_id', async (req, res) => {
+router.get("/environment_conditions/:env_id", async (req, res) => {
   try {
-    const conditions = await db.EnvironmentConditions.findAll({
+    const conditions = await db.environment_conditions.findAll({
       where: {
-        env_id: req.params.env_id
-      }
+        env_id: req.params.env_id,
+      },
     });
     res.json(conditions);
   } catch (err) {
     console.error(err);
-    res.error('Server error');
+    res.error("Server error");
   }
 });
 
-router.post('/environment_conditions', async (req, res) => {
+router.post("/environment_conditions", async (req, res) => {
   const environment_conditions = await db.environment_conditions.findAll();
   const currentId = (await environment_conditions.length) + 1;
   try {
@@ -272,30 +382,123 @@ router.post('/environment_conditions', async (req, res) => {
       race: req.body.race,
       religion: req.body.religion,
       annual_income: req.body.annual_income,
-      gender_ratio: req.body.gender_ratio
+      gender_ratio: req.body.gender_ratio,
     });
     res.json(newDemo);
   } catch (err) {
     console.error(err);
-    res.error('Server error');
+    res.error("Server error");
+  }
+});
+
+router.delete("/environment_conditions/:env_id", async (req, res) => {
+  try {
+    await db.environment_conditions.destroy({
+      where: {
+        evnv_id: req.params.env_id,
+      },
+    });
+    res.send("Successfully Deleted");
+  } catch (err) {
+    console.error(err);
+    res.error("Server error");
+  }
+});
+/// /////////////////////////////////
+/// City endpoints//////////////////
+/// /////////////////////////////////
+router.get("/city", async (req, res) => {
+  try {
+    const city = await db.city.findAll();
+    res.json(city);
+  } catch (err) {
+    console.error(err);
+    res.error("Server error");
+  }
+});
+
+router.get("/city/:city_id", async (req, res) => {
+  try {
+    const city = await db.city.findAll({
+      where: {
+        city_id: req.params.city_id,
+      },
+    });
+    res.json(city);
+  } catch (err) {
+    console.error(err);
+    res.error("Server error");
+  }
+});
+
+router.post("/city", async (req, res) => {
+  const pol = await db.city.findAll();
+  const currentId = (await city.length) + 1;
+  try {
+    const newDemo = await db.city.create({
+      city_id: currentId,
+      city_name: req.body.city_name,
+    });
+    res.json(newDemo);
+  } catch (err) {
+    console.error(err);
+    res.error("Server error");
+  }
+});
+
+router.delete("/city/:city_name", async (req, res) => {
+  try {
+    await db.city.destroy({
+      where: {
+        city_id: req.params.city_id,
+      },
+    });
+    res.send("Successfully Deleted");
+  } catch (err) {
+    console.error(err);
+    res.error("Server error");
+  }
+});
+
+router.put("/city", async (req, res) => {
+  try {
+    await db.city.update(
+      {
+        city_name: req.body.city_name,
+      },
+      {
+        where: {
+          city_name: req.body.city_name,
+        },
+      }
+    );
+    res.send("City successfully updated");
+  } catch (err) {
+    console.error(err);
+    res.error("Server error");
   }
 });
 
 
 
+/// /////////////////////////////////
+/// City join party//////////////////
+/// /////////////////////////////////
+
 /// //////////////////////////////////
 /// ///////Custom SQL Endpoint////////
 /// /////////////////////////////////
-const macrosCustom = 'SELECT `Dining_Hall_Tracker`.`Meals`.`meal_id` AS `meal_id`,`Dining_Hall_Tracker`.`Meals`.`meal_name` AS `meal_name`,`Dining_Hall_Tracker`.`Macros`.`calories` AS `calories`,`Dining_Hall_Tracker`.`Macros`.`carbs` AS `carbs`,`Dining_Hall_Tracker`.`Macros`.`sodium` AS `sodium`,`Dining_Hall_Tracker`.`Macros`.`protein` AS `protein`,`Dining_Hall_Tracker`.`Macros`.`fat` AS `fat`,`Dining_Hall_Tracker`.`Macros`.`cholesterol` AS `cholesterol`FROM(`Dining_Hall_Tracker`.`Meals`JOIN `Dining_Hall_Tracker`.`Macros`)WHERE(`Dining_Hall_Tracker`.`Meals`.`meal_id` = `Dining_Hall_Tracker`.`Macros`.`meal_id`)';
-router.get('/table/data', async (req, res) => {
+const macrosCustom =
+  "SELECT `Dining_Hall_Tracker`.`Meals`.`meal_id` AS `meal_id`,`Dining_Hall_Tracker`.`Meals`.`meal_name` AS `meal_name`,`Dining_Hall_Tracker`.`Macros`.`calories` AS `calories`,`Dining_Hall_Tracker`.`Macros`.`carbs` AS `carbs`,`Dining_Hall_Tracker`.`Macros`.`sodium` AS `sodium`,`Dining_Hall_Tracker`.`Macros`.`protein` AS `protein`,`Dining_Hall_Tracker`.`Macros`.`fat` AS `fat`,`Dining_Hall_Tracker`.`Macros`.`cholesterol` AS `cholesterol`FROM(`Dining_Hall_Tracker`.`Meals`JOIN `Dining_Hall_Tracker`.`Macros`)WHERE(`Dining_Hall_Tracker`.`Meals`.`meal_id` = `Dining_Hall_Tracker`.`Macros`.`meal_id`)";
+router.get("/table/data", async (req, res) => {
   try {
     const result = await db.sequelizeDB.query(macrosCustom, {
-      type: sequelize.QueryTypes.SELECT
+      type: sequelize.QueryTypes.SELECT,
     });
     res.json(result);
   } catch (err) {
     console.error(err);
-    res.error('Server error');
+    res.error("Server error");
   }
 });
 
@@ -310,27 +513,31 @@ INNER JOIN Meals_Locations ml
   ON m.meal_id = ml.meal_id
 INNER JOIN Dining_Hall d
 ON d.hall_id = ml.hall_id;`;
-router.get('/map/data', async (req, res) => {
+router.get("/map/data", async (req, res) => {
   try {
     const result = await db.sequelizeDB.query(mealMapCustom, {
-      type: sequelize.QueryTypes.SELECT
+      type: sequelize.QueryTypes.SELECT,
     });
     res.json(result);
   } catch (err) {
     console.error(err);
-    res.error('Server error');
+    res.error("Server error");
   }
 });
+<<<<<<< HEAD
 
 router.get('/custom', async (req, res) => {
+=======
+router.get("/custom", async (req, res) => {
+>>>>>>> 55e3517cab460bbcddcfb2175fa73d1edc693292
   try {
     const result = await db.sequelizeDB.query(req.body.query, {
-      type: sequelize.QueryTypes.SELECT
+      type: sequelize.QueryTypes.SELECT,
     });
     res.json(result);
   } catch (err) {
     console.error(err);
-    res.error('Server error');
+    res.error("Server error");
   }
 });
 

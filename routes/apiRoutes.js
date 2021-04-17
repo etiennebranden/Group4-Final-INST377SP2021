@@ -342,17 +342,10 @@ router.put("/development", async (req, res) => {
 /// /////////////////////////////////
 /// Environment Conditions Endpoints///
 /// /////////////////////////////////
-<<<<<<< HEAD
-router.get('/environment_conditions', async (req, res) => {
-  try {
-    const conditions = await db.EnvironmentConditions.findAll();
-    res.json(conditions);
-=======
 router.get("/environment_conditions", async (req, res) => {
   try {
-    const conditions = await db.environment_conditions.findAll();
-    res.json(environment_conditions);
->>>>>>> 55e3517cab460bbcddcfb2175fa73d1edc693292
+    const conditions = await db.env_cond.findAll();
+    res.json(env_cond);
   } catch (err) {
     console.error(err);
     res.error("Server error");
@@ -361,7 +354,7 @@ router.get("/environment_conditions", async (req, res) => {
 
 router.get("/environment_conditions/:env_id", async (req, res) => {
   try {
-    const conditions = await db.environment_conditions.findAll({
+    const conditions = await db.env_cond.findAll({
       where: {
         env_id: req.params.env_id,
       },
@@ -374,10 +367,10 @@ router.get("/environment_conditions/:env_id", async (req, res) => {
 });
 
 router.post("/environment_conditions", async (req, res) => {
-  const environment_conditions = await db.environment_conditions.findAll();
-  const currentId = (await environment_conditions.length) + 1;
+  const environment_conditions = await db.env_cond.findAll();
+  const currentId = (await env_cond.length) + 1;
   try {
-    const newDemo = await db.environment_conditions.create({
+    const newDemo = await db.env_cond.create({
       env_id: currentId,
       race: req.body.race,
       religion: req.body.religion,
@@ -393,7 +386,7 @@ router.post("/environment_conditions", async (req, res) => {
 
 router.delete("/environment_conditions/:env_id", async (req, res) => {
   try {
-    await db.environment_conditions.destroy({
+    await db.env_cond.destroy({
       where: {
         evnv_id: req.params.env_id,
       },

@@ -239,10 +239,10 @@ router.put('/macros', async (req, res) => {
 /// /////////////////////////////////
 /// Environment Conditions Endpoints///
 /// /////////////////////////////////
-router.get('/restrictions', async (req, res) => {
+router.get('/environment_conditions', async (req, res) => {
   try {
-    const restrictions = await db.DietaryRestrictions.findAll();
-    res.json(restrictions);
+    const conditions = await db.EnvironmentConditions.findAll();
+    res.json(conditions);
   } catch (err) {
     console.error(err);
     res.error('Server error');
@@ -321,6 +321,7 @@ router.get('/map/data', async (req, res) => {
     res.error('Server error');
   }
 });
+
 router.get('/custom', async (req, res) => {
   try {
     const result = await db.sequelizeDB.query(req.body.query, {

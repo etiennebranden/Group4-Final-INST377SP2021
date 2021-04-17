@@ -8,16 +8,16 @@ export default (sequelize, DataTypes) => {
         primaryKey: true
       },
       tempurature: {
-        type: DataTypes.DOUBLE
+        type: DataTypes.FLOAT
       },
       wind_speed: {
-        type: DataTypes.DOUBLE
+        type: DataTypes.FLOAT
       },
       air_pressure: {
-        type: DataTypes.DOUBLE
+        type: DataTypes.FLOAT
       },
       humidity: {
-        type: DataTypes.DOUBLE
+        type: DataTypes.FLOAT
       }
     },
     { freezeTableName: true, timestamps: false }

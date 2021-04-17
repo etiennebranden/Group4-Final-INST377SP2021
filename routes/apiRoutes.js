@@ -517,12 +517,8 @@ router.get("/map/data", async (req, res) => {
     res.error("Server error");
   }
 });
-<<<<<<< HEAD
 
 router.get('/custom', async (req, res) => {
-=======
-router.get("/custom", async (req, res) => {
->>>>>>> 55e3517cab460bbcddcfb2175fa73d1edc693292
   try {
     const result = await db.sequelizeDB.query(req.body.query, {
       type: sequelize.QueryTypes.SELECT,

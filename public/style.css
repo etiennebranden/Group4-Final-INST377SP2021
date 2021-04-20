@@ -1,9 +1,29 @@
 /* Map */
-html, body {
+html {
     height: 100%;
     margin: 0;
+    background: #f5d081;
 }
 #map {
     width: 600px;
     height: 400px;
+} 
+
+body {
+    font: normal 18px/1.5 "Fira Sans", "Helvetica Neue", sans-serif;
+    color: rgb(0, 0, 0);
+    padding: 50px 0;
 }
+
+h1 {
+      font-size: 3rem;
+      text-align: center;
+      font-weight: 800;
+}
+  
+.container {
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+  

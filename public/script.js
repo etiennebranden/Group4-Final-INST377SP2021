@@ -13,7 +13,7 @@ async function getInfo() {
 async function windowActions() {
   const data = await getInfo();
 
-  const cityArray = [1, 2, 3, 4, 5];
+  const cityArray = [1, 2, 3, 4, 5,6,7,8,9,10];
   const selected = cityArray.map((element) => {
     const random = getRandom(0, data.length - 1);
     return data[random];
@@ -27,19 +27,17 @@ async function windowActions() {
     animationEnabled: true,
     theme: "light2", // "light1", "light2", "dark1", "dark2"
     title: {
-      text: "Top 5 City",
+      text: "Cities Based On Population Density",
     },
     axisX: {
       axisX: "City",
     },
     axisY: {
-      title: "Types of Pollution",
+      title: "Population Density",
     },
     data: [
       {
         type: "column",
-        showInLegend: true,
-        legendMarkerColor: "grey",
         name: "City Name",
         dataPoints: [
           { label: selected[0].city_name, y: selected[0].pop_denstiy },
@@ -47,6 +45,13 @@ async function windowActions() {
           { label: selected[2].city_name, y: selected[2].pop_denstiy },
           { label: selected[3].city_name, y: selected[3].pop_denstiy },
           { label: selected[4].city_name, y: selected[4].pop_denstiy },
+          { label: selected[5].city_name, y: selected[5].pop_denstiy },
+          { label: selected[6].city_name, y: selected[6].pop_denstiy },
+          { label: selected[7].city_name, y: selected[7].pop_denstiy },
+          { label: selected[8].city_name, y: selected[8].pop_denstiy },
+          { label: selected[9].city_name, y: selected[9].pop_denstiy },
+
+
         ],
       },
     ],

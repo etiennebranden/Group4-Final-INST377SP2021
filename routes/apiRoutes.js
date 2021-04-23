@@ -425,7 +425,7 @@ router.get("/city/:city_id", async (req, res) => {
 });
 
 router.post("/city", async (req, res) => {
-  const pol = await db.city.findAll();
+  const city = await db.city.findAll();
   const currentId = (await city.length) + 1;
   try {
     const newDemo = await db.city.create({
@@ -472,11 +472,156 @@ router.put("/city", async (req, res) => {
   }
 });
 
+////////////////////////////////
+////// Country end points//////
+//////////////////////////////
+router.get("/country", async (req, res) => {
+  try {
+    const country = await db.country.findAll();
+    res.json(country);
+  } catch (err) {
+    console.error(err);
+    res.error("Server error");
+  }
+});
+
+router.get("/country/:country_id", async (req, res) => {
+  try {
+    const country = await db.country.findAll({
+      where: {
+        country_id: req.params.country_id,
+      },
+    });
+    res.json(country);
+  } catch (err) {
+    console.error(err);
+    res.error("Server error");
+  }
+});
+
+router.post("/country", async (req, res) => {
+  const country = await db.country.findAll();
+  const currentId = (await country.length) + 1;
+  try {
+    const newDemo = await db.country.create({
+      country_id: currentId,
+      country_name: req.body.country_name,
+    });
+    res.json(newDemo);
+  } catch (err) {
+    console.error(err);
+    res.error("Server error");
+  }
+});
+
+router.delete("/country/:country_name", async (req, res) => {
+  try {
+    await db.country.destroy({
+      where: {
+        country_id: req.params.country_id,
+      },
+    });
+    res.send("Successfully Deleted");
+  } catch (err) {
+    console.error(err);
+    res.error("Server error");
+  }
+});
+
+router.put("/country", async (req, res) => {
+  try {
+    await db.country.update(
+      {
+        country_name: req.body.country_name,
+      },
+      {
+        where: {
+          country_name: req.body.country_name,
+        },
+      }
+    );
+    res.send("Country successfully updated");
+  } catch (err) {
+    console.error(err);
+    res.error("Server error");
+  }
+});
 
 
 /// /////////////////////////////////
 /// City join party//////////////////
 /// /////////////////////////////////
+router.get("/city_join_party", async (req, res) => {
+  try {
+    const city_join_party = await db.city_join_party.findAll();
+    res.json(city_join_party);
+  } catch (err) {
+    console.error(err);
+    res.error("Server error");
+  }
+});
+
+router.get("/city_join_party/:city_join_party_id", async (req, res) => {
+  try {
+    const city_join_party = await db.city_join_party.findAll({
+      where: {
+        city_join_party_id: req.params.city_join_party_id,
+      },
+    });
+    res.json(city_join_party);
+  } catch (err) {
+    console.error(err);
+    res.error("Server error");
+  }
+});
+
+router.post("/city_join_party", async (req, res) => {
+  const city_join_party = await db.city_join_party.findAll();
+  const currentId = (await city_join_party.length) + 1;
+  try {
+    const newDemo = await db.city_join_party.create({
+      city_join_party_id: currentId,
+      city_join_party_name: req.body.city_join_party_name,
+    });
+    res.json(newDemo);
+  } catch (err) {
+    console.error(err);
+    res.error("Server error");
+  }
+});
+
+router.delete("/city_join_party/:city_join_party_name", async (req, res) => {
+  try {
+    await db.city_join_party.destroy({
+      where: {
+        city_join_party_id: req.params.city_join_party_id,
+      },
+    });
+    res.send("Successfully Deleted");
+  } catch (err) {
+    console.error(err);
+    res.error("Server error");
+  }
+});
+
+router.put("/city_join_party", async (req, res) => {
+  try {
+    await db.city_join_party.update(
+      {
+        city_join_party_name: req.body.city_join_party_name,
+      },
+      {
+        where: {
+          city_join_party_name: req.body.city_join_party_name,
+        },
+      }
+    );
+    res.send("City join party successfully updated");
+  } catch (err) {
+    console.error(err);
+    res.error("Server error");
+  }
+});
 
 /// //////////////////////////////////
 /// ///////Custom SQL Endpoint////////

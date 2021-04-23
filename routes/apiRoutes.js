@@ -258,7 +258,7 @@ router.put("/pol_party", async (req, res) => {
 /// /////////////////////////////////
 router.get("/development", async (req, res) => {
   try {
-    const macros = await db.dev.findAll();
+    const development = await db.dev.findAll();
     res.send(development);
   } catch (err) {
     console.error(err);
@@ -313,6 +313,25 @@ router.delete("/development/:development_id", async (req, res) => {
 
 router.put("/development", async (req, res) => {
   try {
+    await db.development.update(
+      {
+        development_name: req.body.development_name,
+      },
+      {
+        where: {
+          development_id: req.body.development_id,
+        },
+      }
+    );
+    res.send("Successfully Updated");
+  } catch (err) {
+    console.error(err);
+    res.error("Server error");
+  }
+});
+
+/* router.put("/development", async (req, res) => {
+  try {
     // N.B. - this is a good example of where to use code validation to confirm objects
     await db.Macros.update(
       {
@@ -337,7 +356,7 @@ router.put("/development", async (req, res) => {
     console.error(err);
     res.error("Server error");
   }
-});
+}); */
 
 /// /////////////////////////////////
 /// Environment Conditions Endpoints///

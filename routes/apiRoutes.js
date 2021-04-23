@@ -258,7 +258,7 @@ router.put("/pol_party", async (req, res) => {
 /// /////////////////////////////////
 router.get("/development", async (req, res) => {
   try {
-    const macros = await db.dev.findAll();
+    const development = await db.dev.findAll();
     res.send(development);
   } catch (err) {
     console.error(err);

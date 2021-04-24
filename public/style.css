@@ -61,5 +61,8 @@ li {
     height: 370px; 
     width: 90%;
     display: inline-block;
-    
+}
+
+ul {
+    padding-inline-start: 40px;
 }

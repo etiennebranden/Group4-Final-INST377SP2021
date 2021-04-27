@@ -51,6 +51,35 @@
             </nav>
 
         <h1>Database</h1>   
+        <br>
+        <h2 class="subtitle is-4">Update, Add, and Change the Air Pollution Database</h2>
+        <div class="field">
+            <label class="label">Search for the Air Pollution by City:</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="Text input">
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Select a category you want to change</label>
+            <div class="control">
+              <div class="select">
+                <select>
+                  <option>City</option>
+                  <option>Enviornment</option>
+                  <option>Demographic</option>
+                  <option>Political Party</option>
+                  <option>Development</option>
+                </select>
+              </div>
+            </div>
+        </div>
+        <div class="control">
+            <button class="button is-link">Update Record</button>
+            <button class="button is-link">Delete Record</button>
+            <button class="button is-link">Add Record</button>
+        </div>
+        <br>
+
         <div id='map'></div>
         <script src="script.js"></script>
         <div id="chartContainer"></div>

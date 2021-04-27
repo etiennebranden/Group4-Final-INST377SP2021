@@ -16,7 +16,10 @@ h1 {
       text-align: center;
       font-weight: 800;
 }
-  
+
+h2 {
+    text-align: center;
+}
 .container {
     width: 80%;
     max-width: 1200px;

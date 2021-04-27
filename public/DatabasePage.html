@@ -55,13 +55,11 @@
         <h2 class="subtitle is-4">Update, Add, and Change the Air Pollution Database</h2>
         <div class="field">
             <label class="label">Search for the Air Pollution by City:</label>
-            <div class="control">
-              <input class="input" type="text" placeholder="Text input">
-            </div>
+            <input class="input" type="text" placeholder="Text input">
         </div>
         <div class="field">
             <label class="label">Select a category you want to change</label>
-            <div class="control">
+            <div>
               <div class="select">
                 <select>
                   <option>City</option>
@@ -73,17 +71,17 @@
               </div>
             </div>
         </div>
-        <div class="control">
+        <div>
             <button class="button is-link">Update Record</button>
             <button class="button is-link">Delete Record</button>
             <button class="button is-link">Add Record</button>
         </div>
         <br>
         <span> 
-        <div id='map'></div>
+        <div class = "mapandchart" id='map'></div>
         <script src="script.js"></script>
-        <div id="chartContainer"></div>
+        <div class = "mapandchart" id="chartContainer"></div>
         </span>
-        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script> 
     </body>
 </html>

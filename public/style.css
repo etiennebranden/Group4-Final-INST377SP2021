@@ -30,6 +30,10 @@ li {
     list-style-type: circle;
 }
 
+mapandchart {
+    display: inline-block
+}
+ 
 /*Map*/
 #map {
     width: 600px;

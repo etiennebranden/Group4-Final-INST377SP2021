@@ -256,7 +256,7 @@ router.put("/pol_party", async (req, res) => {
 /// /////////////////////////////////
 /// ////////Development Endpoints/////////
 /// /////////////////////////////////
-router.get("/development", async (req, res) => {
+router.get("/dev", async (req, res) => {
   try {
     const development = await db.dev.findAll();
     res.send(development);
@@ -266,9 +266,9 @@ router.get("/development", async (req, res) => {
   }
 });
 
-router.get("/development/:development_id", async (req, res) => {
+router.get("/dev/:development_id", async (req, res) => {
   try {
-    const development = await db.development.findAll({
+    const development = await db.dev.findAll({
       where: {
         development_id: req.params.development_id,
       },
@@ -280,8 +280,8 @@ router.get("/development/:development_id", async (req, res) => {
   }
 });
 
-router.post("/development", async (req, res) => {
-  const development = await db.development.findAll();
+router.post("/dev", async (req, res) => {
+  const development = await db.dev.findAll();
   const currentId = (await development.length) + 1;
   try {
     const newDemo = await db.development.create({
@@ -297,9 +297,9 @@ router.post("/development", async (req, res) => {
     res.error("Server error");
   }
 });
-router.delete("/development/:development_id", async (req, res) => {
+router.delete("/dev/:development_id", async (req, res) => {
   try {
-    await db.development.destroy({
+    await db.dev.destroy({
       where: {
         development_id: req.params.development_id,
       },
@@ -311,9 +311,9 @@ router.delete("/development/:development_id", async (req, res) => {
   }
 });
 
-router.put("/development", async (req, res) => {
+router.put("/dev", async (req, res) => {
   try {
-    await db.development.update(
+    await db.dev.update(
       {
         development_name: req.body.development_name,
       },
@@ -361,17 +361,17 @@ router.put("/development", async (req, res) => {
 /// /////////////////////////////////
 /// Environment Conditions Endpoints///
 /// /////////////////////////////////
-router.get("/environment_conditions", async (req, res) => {
+router.get("/env_cond", async (req, res) => {
   try {
     const conditions = await db.env_cond.findAll();
-    res.json(env_cond);
+    res.json(conditions);
   } catch (err) {
     console.error(err);
     res.error("Server error");
   }
 });
 
-router.get("/environment_conditions/:env_id", async (req, res) => {
+router.get("/env_cond/:env_id", async (req, res) => {
   try {
     const conditions = await db.env_cond.findAll({
       where: {
@@ -385,11 +385,11 @@ router.get("/environment_conditions/:env_id", async (req, res) => {
   }
 });
 
-router.post("/environment_conditions", async (req, res) => {
+router.post("/env_cond", async (req, res) => {
   const environment_conditions = await db.env_cond.findAll();
   const currentId = (await env_cond.length) + 1;
   try {
-    const newDemo = await db.env_cond.create({
+    const newDemo = await db.environment_conditions.create({
       env_id: currentId,
       race: req.body.race,
       religion: req.body.religion,
@@ -403,7 +403,7 @@ router.post("/environment_conditions", async (req, res) => {
   }
 });
 
-router.delete("/environment_conditions/:env_id", async (req, res) => {
+router.delete("/env_cond/:env_id", async (req, res) => {
   try {
     await db.env_cond.destroy({
       where: {

@@ -33,7 +33,10 @@ h2 {
     text-align: center;
     font-weight: 800;
 }
-  
+
+h2 {
+    text-align: center;
+}
 .container {
     width: 80%;
     max-width: 1200px;
@@ -49,6 +52,10 @@ h2 {
     padding-top: 60px;
 }
 
+mapandchart {
+    display: inline-block
+}
+ 
 /*Map*/
 #map {
     width: 600px;
@@ -88,5 +95,8 @@ h2 {
     height: 370px; 
     width: 90%;
     display: inline-block;
-    
+}
+
+ul {
+    padding-inline-start: 40px;
 }

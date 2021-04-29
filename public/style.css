@@ -2,19 +2,36 @@
 html {
     height: 100%;
     margin: 0;
-    background: #89caff;
+    background: white;
 }
 
-body {
-    font: normal 18px/1.5 "Fira Sans", "Helvetica Neue", sans-serif;
-    color: rgb(0, 0, 0);
-    padding: 50px 0;
+.navbar {
+    position: fixed;
+    width: 100%;
+    
 }
+body {
+    font: normal 18px/1.5 "Courier", "monospace", sans-serif;
+    color: #000000;
+    padding-right: 50px;
+    padding-left: 50px;
+    padding-bottom: 60px;
+}
+
 
 h1 {
       font-size: 3rem;
+      color: #4D3F36;
       text-align: center;
       font-weight: 800;
+      padding-top: 100px;
+}
+
+h2 {
+    font-size: 2rem;
+    color: #4D3F36;
+    text-align: center;
+    font-weight: 800;
 }
   
 .container {
@@ -23,8 +40,13 @@ h1 {
     margin: 0 auto;
 }
 
-li {
-    list-style-type: circle;
+.APLevel {
+    background: #4D321F;
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 60px;
 }
 
 /*Map*/
@@ -33,17 +55,20 @@ li {
     height: 400px;
     text-align: center;
 }
-.info { 
-    padding: 6px 8px; 
-    font: 14px/16px Arial, Helvetica, sans-serif; 
-    background: white; 
-    background: rgba(255,255,255,0.8); 
-    box-shadow: 0 0 15px rgba(0,0,0,0.2); 
-    border-radius: 5px; } 
-.info h4 { 
-    margin: 0 0 5px; 
-    color: #777; 
+
+#info { 
+    color: white; 
+    display: flex; 
+    background: #4D321F;
+    padding-left: 40px;
+    padding-right: 10px;
+
+} 
+
+#info ul li {
+    list-style-type: circle;
 }
+    
 .legend { 
     text-align: left; 
     line-height: 18px; 
@@ -56,6 +81,8 @@ li {
     margin-right: 8px; 
     opacity: 0.7; 
 }
+
+
 /*Bar Chart*/
 #chartContainer {
     height: 370px; 

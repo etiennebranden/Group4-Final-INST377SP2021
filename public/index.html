@@ -8,85 +8,113 @@
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
         <link rel="stylesheet" type="text/css" href="style.css">
+        
     </head>
     <body>
-            <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
-                <a
-                  role="button"
-                  class="navbar-burger"
-                  aria-label="menu"
-                  aria-expanded="false"
-                >
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand" >
+          <a class="navbar-item" href='index.html'>
+            <img src="0100Logo.png">
+          </a>
+      
+          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+      
+        <div class="navbar-menu" id="navbarBasicExample" >
+          <div class="navbar-start">
+            <a class="navbar-item" href='index.html'>
+              Home
+            </a>
 
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                </a>
-              </div>
-              <div class="navbar-start">
-                <a class="navbar-item" href='index.html'>
-                  Home
-                </a>
-          
+            <a class="navbar-item" href ='DatabasePage.html'>
+              Database
+            </a>
+      
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                More
+              </a>
+      
+              <div class="navbar-dropdown">
                 <a class="navbar-item" href='AboutUs.html'>
                   About Us
                 </a>
-
-                <a class="navbar-item" href = 'DatabasePage.html'>
-                    Database
-                  </a>
+                <a class="navbar-item" href='contactUs.html'>
+                  Contact Us
+                </a>
               </div>
-              <div class="navbar-end">
-                <div class="navbar-item">
-                  <div class="buttons">
-                    <a class="button is-primary">
-                      <strong>Contact Us</strong>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </nav>
-        <h1>Team 4: Air Pollution Group Project</h1>
+            </div>
+          </div>
+        </div>
+      </nav>
+        <h1>Air Pollution Group Project</h1>
+        <h2>By Team 0100</h2>
+        <br>
+        <br>
         <br>
         <figure class="image is-3by1">
           <img src="airpollution.png">
         </figure>
         <br>
-        <div class="container is-fluid">
-          <div class="notification has-background-primary-light	" style= "text-align:center">
+        <br> 
+        <br>
+        <br>
+        <div class="container">
+          <div style="text-align:center; background: #CCA98F;">
+            <br>
+            <br>
             <strong>Welcome to our website!</strong>
             <br> 
+            <br>
+            <br>
+            <br>
             The problem we’re hoping to solve is raising awareness on air pollution
             worldwide. In order to do this, we have utilized a database on particle pollution
             with data ranging from Seoul to New South Wales. Using our website, students will be able to
-            retrieve and manipulate data to gain a larger understanding on climate change. Our main stakeholders are students who are looking 
+            retrieve and manipulate data to gain a larger understanding on climate change. 
+            <br>
+            <br>
+            <br>
+            <br>
+            Our main stakeholders are students who are looking 
             to learn more about current air pollution and climate change issues over the world. The student can be in a
-            relative or non-relative major to our topic. Moreover, we believe that anyone
-            interested in environmental conservation would find this useful as well.
+            relative or non-relative major to our topic. 
+            <br>
+            <br>
+            <br>
+            <br>
+            Moreover, we believe that anyone interested in environmental conservation would find this useful as well.
+            <br>
+            <br>
+            <br>
           </div>
         </div>
         <br>
-        <div class="container" style="display: flex; height:300 px;">
-          <div style="width: 50%; background: rgb(13, 103, 177);">
-            <ul>
-              <br>
-              <br>
-              <li>The World Health Organization estimates that around 7 million people die every year from exposure to polluted air</li>
-              <br>
-              <br>
-              <li>Air pollution is the fourth-largest threat to human health, behind high blood pressure, dietary risks and smoking. 
+        <br>
+        <br> 
+        <br>
+        <div class="APLevel">
+          <img src="airpollutionlevels.png" >
+        </div>
+        <div class="container" id="info">
+          <ul>
+            <br>
+            <br>
+            <li>The World Health Organization estimates that around 7 million people die every year from exposure to polluted air</li>
+            <br>
+            <br>
+            <li>Air pollution is the fourth-largest threat to human health, behind high blood pressure, dietary risks and smoking. 
                 The health risks of breathing dirty air include respiratory infections and cardiovascular diseases, stroke, chronic lung disease and lung cancer.</li>
-              <br>
-              <br>
-              <li>Approximately 82 million people nationwide lived in counties with dangerous pollution levels </li>
-              <br>
-              <br>
-            </ul>
-            
-          </div>
-          <div style="flex-grow: 1; height:300 px;">
-            <img src="airpollutionlevels.png">
-          </div>
+            <br>
+            <br>
+            <li>Approximately 82 million people nationwide lived in counties with dangerous pollution levels </li>
+            <br>
+            <br>
+          </ul>
         </div>
         <script src="script.js"></script>
     </body>

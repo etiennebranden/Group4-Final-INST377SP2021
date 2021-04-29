@@ -13,48 +13,50 @@
         crossorigin=""></script>
     </head>
     <body>
-            <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
-                <a
-                  role="button"
-                  class="navbar-burger"
-                  aria-label="menu"
-                  aria-expanded="false"
-                >
-                </a>
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand" >
+          <a class="navbar-item" href='index.html'>
+            <img src="0100Logo.png">
+          </a>
+      
+          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+      
+        <div class="navbar-menu" id="navbarBasicExample" >
+          <div class="navbar-start">
+            <a class="navbar-item" href='index.html'>
+              Home
+            </a>
 
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-              </div>
-              <div class="navbar-start">
-                <a class="navbar-item" href='index.html'>
-                  Home
-                </a>
-          
+            <a class="navbar-item" href ='DatabasePage.html'>
+              Database
+            </a>
+      
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                More
+              </a>
+      
+              <div class="navbar-dropdown">
                 <a class="navbar-item" href='AboutUs.html'>
                   About Us
                 </a>
-
-                <a class="navbar-item" href = 'DatabasePage.html'>
-                    Database
+                <a class="navbar-item" href='contactUs.html'>
+                  Contact Us
                 </a>
               </div>
-              <div class="navbar-end">
-                <div class="navbar-item">
-                  <div class="buttons">
-                    <a class="button is-primary">
-                      <strong>Contact Us</strong>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </nav>
-
+            </div>
+          </div>
+        </div>
+      </nav>
         <h1>Database</h1>   
         <div id='map'></div>
         <script src="script.js"></script>
         <div id="chartContainer"></div>
-
         <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     </body>
 </html>

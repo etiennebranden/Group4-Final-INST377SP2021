@@ -67,8 +67,8 @@ mapandchart {
     color: white; 
     display: flex; 
     background: #4D321F;
-    padding-left: 40px;
-    padding-right: 10px;
+    padding-left: 30px;
+    padding-right: 25px;
 
 } 
 
@@ -89,6 +89,15 @@ mapandchart {
     opacity: 0.7; 
 }
 
+.smallContainer {
+    text-align:center;
+    background: #997F6B;
+    color: white;
+    padding-top: 50px;
+    padding-right: 50px;
+    padding-left: 50px;
+    padding-bottom: 60px;
+}
 
 /*Bar Chart*/
 #chartContainer {

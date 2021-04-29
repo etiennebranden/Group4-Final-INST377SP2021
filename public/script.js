@@ -195,5 +195,4 @@ async function windowActions() {
   chart.render();
 }
 
-
 window.onload = windowActions;

@@ -8,147 +8,17 @@ async function getInfo() {
   const cityData = await cityRequest.json();
   return cityData;
 }
-
-
-
-async function map(){
-var map = L.map('map').setView([37.8, -96], 4);
-const data = await getInfo();
-
-
-L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ3NhbXJhIiwiYSI6ImNrbnBsbWUyNDFneXoydnB1YnEyODRoenIifQ.jy9pfKpWoMpdCnyHBXOvPQ' , {
-    id: 'mapbox/light-v9',
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-    'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    tileSize: 512,
-    zoomOffset: -1
-}).addTo(map);
-
-L.geoJson(data).addTo(map);
-// control that shows state info on hover
-var info = L.control();
-
-info.onAdd = function (map) {
-    this._div = L.DomUtil.create('div', 'info');
-    this.update();
-    return this._div;
-};
-
-info.update = function (props) {
-    this._div.innerHTML = '<h4>US Population Pollution</h4>' +  (props ?
-        '<b>' + props.city_name + '</b><br />' + props.pop_denstiy + ' people / mi<sup>2</sup>'
-        : 'Hover over a state');
-};
-info.addTo(map);
-
-
-// get color depending on population density value
-function getColor(d) {
-    return d > 100 ? '#800026' :
-            d > 60  ? '#BD0026' :
-            d > 50  ? '#E31A1C' :
-            d > 40  ? '#FC4E2A' :
-            d > 30   ? '#FD8D3C' :
-            d > 20   ? '#FEB24C' :
-            d > 10   ? '#FED976' :
-                        '#FFEDA0';
+async function getPollution() {
+  const pollutionRequest = await fetch("/api/pollution");
+  const pollutionData = await pollutionRequest.json();
+  return pollutionData;
 }
-
-function style(feature) {
-    return {
-        weight: 2,
-        opacity: 1,
-        color: 'white',
-        dashArray: '3',
-        fillOpacity: 0.7,
-        fillColor: getColor(feature.properties.pop_denstiy)
-    };
-}
-
-function highlightFeature(e) {
-    var layer = e.target;
-
-    layer.setStyle({
-        weight: 5,
-        color: '#666',
-        dashArray: '',
-        fillOpacity: 0.7
-    });
-
-    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-        layer.bringToFront();
-    }
-
-    info.update(layer.feature.properties);
-}
-
-var geojson;
-
-function resetHighlight(e) {
-    geojson.resetStyle(e.target);
-    info.update();
-}
-
-function zoomToFeature(e) {
-    map.fitBounds(e.target.getBounds());
-}
-
-var geojson;
-
-	function resetHighlight(e) {
-		geojson.resetStyle(e.target);
-		info.update();
-	}
-
-	function zoomToFeature(e) {
-		map.fitBounds(e.target.getBounds());
-	}
-
-	function onEachFeature(feature, layer) {
-		layer.on({
-			mouseover: highlightFeature,
-			mouseout: resetHighlight,
-			click: zoomToFeature
-		});
-	}
-
-
-//	map.attributionControl.addAttribution('Population data &copy; <a href="http://census.gov/">US Census Bureau</a>');
-
-
-	var legend = L.control({position: 'bottomright'});
-
-	legend.onAdd = function (map) {
-
-		var div = L.DomUtil.create('div', 'info legend'),
-			grades = [0, 10, 20, 30, 40, 50, 60, 100],
-			labels = [],
-			from, to;
-
-		for (var i = 0; i < grades.length; i++) {
-			from = grades[i];
-			to = grades[i + 1];
-
-			labels.push(
-				'<i style="background:' + getColor(from + 1) + '"></i> ' +
-				from + (to ? '&ndash;' + to : '+'));
-		}
-
-		div.innerHTML = labels.join('<br>');
-		return div;
-	};
-
-	legend.addTo(map);
-}
-
-
 
 // Database
 //Bar Chart
 async function windowActions() {
-    await map()
   const data = await getInfo();
-
+  //const polldata = await getPollution();
   const cityArray = [1, 2, 3, 4, 5,6,7,8,9,10];
   const selected = cityArray.map((element) => {
     const random = getRandom(0, data.length - 1);
@@ -159,7 +29,19 @@ async function windowActions() {
     console.log(check);
   });
 
-  var chart = new CanvasJS.Chart("chartContainer", {
+  const polldata = await getPollution();
+  const pollArray = [1, 2, 3, 4, 5,6,7,8,9,10];
+  const pselected = pollArray.map((air) => {
+    const random = getRandom(0, polldata.length - 1);
+    return polldata[random];
+  });
+  console.table(pselected);
+  pselected.forEach((check2) => {
+    console.log(check2);
+  });
+
+
+  var chart1 = new CanvasJS.Chart("chartContainer1", {
     animationEnabled: true,
     theme: "light2", // "light1", "light2", "dark1", "dark2"
     title: {
@@ -192,7 +74,101 @@ async function windowActions() {
       },
     ],
   });
-  chart.render();
+
+  var chart2 = new CanvasJS.Chart("chartContainer2", {
+    animationEnabled: true,
+    title:{
+      text: "Pollution"
+    },
+    axisX: {
+      valueFormatString: ""
+    },
+    axisY: {
+      prefix: ""
+    },
+    toolTip: {
+      shared: true
+    },
+    data: [{
+      type: "stackedBar",
+      name: "O3",
+      showInLegend: "true",
+      xValueFormatString: "",
+      yValueFormatString: "",
+      dataPoints: [
+        { x: pselected[0].pollution_id, y: pselected[0].O3 },
+        { x: pselected[1].pollution_id, y: pselected[1].O3},
+        { x: pselected[2].pollution_id, y: pselected[2].O3},
+        { x: pselected[3].pollution_id, y: pselected[3].O3},
+        { x: pselected[4].pollution_id, y: pselected[4].O3},
+        { x: pselected[5].pollution_id, y: pselected[5].O3},
+        { x: pselected[6].pollution_id, y: pselected[6].O3},
+        { x: pselected[7].pollution_id, y: pselected[7].O3 },
+        { x: pselected[8].pollution_id, y: pselected[8].O3 },
+        { x: pselected[9].pollution_id, y: pselected[9].O3},
+      ]
+    },
+    {
+      type: "stackedBar",
+      name: "PM10",
+      showInLegend: "true",
+      xValueFormatString: "",
+      yValueFormatString: "",
+      dataPoints: [
+        { x: pselected[0].pollution_id, y: pselected[0].PM10 },
+        { x: pselected[1].pollution_id, y: pselected[1].PM10 },
+        { x: pselected[2].pollution_id, y: pselected[2].PM10 },
+        { x: pselected[3].pollution_id, y: pselected[3].PM10 },
+        { x: pselected[4].pollution_id, y: pselected[4].PM10 },
+        { x: pselected[5].pollution_id, y: pselected[5].PM10 },
+        { x: pselected[6].pollution_id, y: pselected[6].PM10 },
+        { x: pselected[7].pollution_id, y: pselected[7].PM10 },
+        { x: pselected[8].pollution_id, y: pselected[8].PM10 },
+        { x: pselected[9].pollution_id, y: pselected[9].PM10 },
+      ]
+    },
+    {
+      type: "stackedBar",
+      name: "SO2",
+      showInLegend: "true",
+      xValueFormatString: "",
+      yValueFormatString: "",
+      dataPoints: [
+        { x: pselected[0].pollution_id, y: pselected[0].SO2 },
+        { x: pselected[1].pollution_id, y: pselected[1].SO2 },
+        { x: pselected[2].pollution_id, y: pselected[2].SO2 },
+        { x: pselected[3].pollution_id, y: pselected[3].SO2 },
+        { x: pselected[4].pollution_id, y: pselected[4].SO2 },
+        { x: pselected[5].pollution_id, y: pselected[5].SO2 },
+        { x: pselected[6].pollution_id, y: pselected[6].SO2 },
+        { x: pselected[7].pollution_id, y: pselected[7].SO2 },
+        { x: pselected[8].pollution_id, y: pselected[8].SO2 },
+        { x: pselected[9].pollution_id, y: pselected[9].SO2 },
+      ]
+    },
+    {
+      type: "stackedBar",
+      name: "NO2",
+      showInLegend: "true",
+      xValueFormatString: "",
+      yValueFormatString: "",
+      dataPoints: [
+        { x: pselected[0].pollution_id, y: pselected[0].NO2 },
+        { x: pselected[1].pollution_id, y: pselected[1].NO2 },
+        { x: pselected[2].pollution_id, y: pselected[2].NO2 },
+        { x: pselected[3].pollution_id, y: pselected[3].NO2 },
+        { x: pselected[4].pollution_id, y: pselected[4].NO2 },
+        { x: pselected[5].pollution_id, y: pselected[5].NO2 },
+        { x: pselected[6].pollution_id, y: pselected[6].NO2 },
+        { x: pselected[7].pollution_id, y: pselected[7].NO2 },
+        { x: pselected[8].pollution_id, y: pselected[8].NO2 },
+        { x: pselected[9].pollution_id, y: pselected[9].NO2 },
+      ]
+    }]
+  });
+  chart1.render();
+  chart2.render();
+
 }
 
 window.onload = windowActions;

@@ -170,5 +170,20 @@ async function windowActions() {
   chart2.render();
 
 }
+//#endregion
+async function AirPollutionData() {
+  const apif = await fetch('/api/allrecords');
+  const calendarArray = await apif.json();
+  const y = document.querySelector('.target'); 
+  calendarArray.forEach((c) => {
+      const CVar = document.createElement('tr')
+      CVar.innerHTML =`
+          <td>${c.city_name}</td>
+          <td>${c.O3}</td>
+          <td>${c.PM10}</td>
+      `;
+      y.append(CVar)
+  });
+}
 
 window.onload = windowActions;

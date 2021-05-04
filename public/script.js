@@ -170,7 +170,7 @@ async function windowActions() {
   chart2.render();
 
 
-
+  /*
   const data = await fetch('/api/allrecords');
   const pollutionarray = await data.json();
   const y = document.querySelector('.target'); 
@@ -182,7 +182,7 @@ async function windowActions() {
           <td>${c.PM10}</td>
       `;
       y.append(CVar)
-  });
+  });*/
 
 }
 window.onload = windowActions;

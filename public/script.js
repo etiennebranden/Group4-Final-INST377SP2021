@@ -169,13 +169,12 @@ async function windowActions() {
   chart1.render();
   chart2.render();
 
-}
-//#endregion
-async function AirPollutionData() {
-  const apif = await fetch('/api/allrecords');
-  const calendarArray = await apif.json();
+
+
+  const data = await fetch('/api/allrecords');
+  const pollutionarray = await data.json();
   const y = document.querySelector('.target'); 
-  calendarArray.forEach((c) => {
+  pollutionarray.forEach((c) => {
       const CVar = document.createElement('tr')
       CVar.innerHTML =`
           <td>${c.city_name}</td>
@@ -184,6 +183,6 @@ async function AirPollutionData() {
       `;
       y.append(CVar)
   });
-}
 
+}
 window.onload = windowActions;

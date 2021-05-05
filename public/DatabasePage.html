@@ -76,25 +76,18 @@
           <br>
           <br>
           <br>
-            <label class="label">Search for the Air Pollution by City:</label>
-            <input class="input" type="text" placeholder="Text input">
-          <div class="field">
-            <br>
-            <br>
-              <label class="label">Select a category you want to change</label>
-              <div>
-                <div class="select">
-                  <select>
-                    <option>City</option>
-                    <option>Enviornment</option>
-                    <option>Demographic</option>
-                    <option>Political Party</option>
-                    <option>Development</option>
-                  </select>
-                </div>
-              </div>
-          </div>
-        </div>
+
+          <label class="label">Search for the Air Pollution by City:</label>
+          <form action="/api/pollution" id="recordSubmit">
+            <label for="03"></label>  
+            <input class="input" placeholder="Text input" type="text" name="O3" id="O3">
+            <button type="submit">Submit Form</button>
+          </form>
+
+          <br>
+          <br>
+          <br>
+
         <div>
             <button class="button is-link">Update Record</button>
             <button class="button is-link">Delete Record</button>

@@ -10,6 +10,7 @@ router.get("/", (req, res) => {
   res.send("Welcome to the GROUP 4 Air Pollution APP!");
 });
 
+
 /// /////////////////////////////////
 /// ////Demgraphics Endpoints////////
 /// /////////////////////////////////

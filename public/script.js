@@ -1,3 +1,23 @@
+//getting data for form
+async function displaydata() {
+  console.log('loaded window')
+  const form = document.querySelector('#recordSubmit');
+  const name = document.querySelector('#03');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    console.info('submitted form', e.target);
+  })
+  const post = await fetch('/api/pollution', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({O3: name.value})
+  });
+}
+
+
 function getRandom(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -8,6 +28,7 @@ async function getInfo() {
   const cityData = await cityRequest.json();
   return cityData;
 }
+
 async function getPollution() {
   const pollutionRequest = await fetch("/api/pollution");
   const pollutionData = await pollutionRequest.json();
@@ -168,21 +189,6 @@ async function windowActions() {
   });
   chart1.render();
   chart2.render();
-
-
-  /*
-  const data = await fetch('/api/allrecords');
-  const pollutionarray = await data.json();
-  const y = document.querySelector('.target'); 
-  pollutionarray.forEach((c) => {
-      const CVar = document.createElement('tr')
-      CVar.innerHTML =`
-          <td>${c.city_name}</td>
-          <td>${c.O3}</td>
-          <td>${c.PM10}</td>
-      `;
-      y.append(CVar)
-  });*/
-
+  displaydata();
 }
 window.onload = windowActions;

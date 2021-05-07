@@ -93,10 +93,6 @@ router.put("/demo", async (req, res) => {
   }
 });
 
-/* Everything past here needs to be changed to point to OUR database, not the dining hall database that it 
-// is currently pointing
-*/
-
 /// /////////////////////////////////
 /// ////////Pollution Endpoints//////////
 /// /////////////////////////////////
@@ -330,34 +326,6 @@ router.put("/dev", async (req, res) => {
     res.error("Server error");
   }
 });
-
-/* router.put("/development", async (req, res) => {
-  try {
-    // N.B. - this is a good example of where to use code validation to confirm objects
-    await db.Macros.update(
-      {
-        meal_name: req.body.meal_name,
-        meal_category: req.body.meal_category,
-        calories: req.body.calories,
-        serving_size: req.body.serving_size,
-        cholesterol: req.body.cholesterol,
-        sodium: req.body.sodium,
-        carbs: req.body.carbs,
-        protein: req.body.protein,
-        fat: req.body.fat,
-      },
-      {
-        where: {
-          meal_id: req.body.meal_id,
-        },
-      }
-    );
-    res.send("Successfully Updated");
-  } catch (err) {
-    console.error(err);
-    res.error("Server error");
-  }
-}); */
 
 /// /////////////////////////////////
 /// Environment Conditions Endpoints///
@@ -637,58 +605,6 @@ router.put("/city_join_party", async (req, res) => {
       }
     );
     res.send("City join party successfully updated");
-  } catch (err) {
-    console.error(err);
-    res.error("Server error");
-  }
-});
-
-/// //////////////////////////////////
-/// ///////Custom SQL Endpoint////////
-/// /////////////////////////////////
-const macrosCustom =
-  "SELECT `Dining_Hall_Tracker`.`Meals`.`meal_id` AS `meal_id`,`Dining_Hall_Tracker`.`Meals`.`meal_name` AS `meal_name`,`Dining_Hall_Tracker`.`Macros`.`calories` AS `calories`,`Dining_Hall_Tracker`.`Macros`.`carbs` AS `carbs`,`Dining_Hall_Tracker`.`Macros`.`sodium` AS `sodium`,`Dining_Hall_Tracker`.`Macros`.`protein` AS `protein`,`Dining_Hall_Tracker`.`Macros`.`fat` AS `fat`,`Dining_Hall_Tracker`.`Macros`.`cholesterol` AS `cholesterol`FROM(`Dining_Hall_Tracker`.`Meals`JOIN `Dining_Hall_Tracker`.`Macros`)WHERE(`Dining_Hall_Tracker`.`Meals`.`meal_id` = `Dining_Hall_Tracker`.`Macros`.`meal_id`)";
-router.get("/table/data", async (req, res) => {
-  try {
-    const result = await db.sequelizeDB.query(macrosCustom, {
-      type: sequelize.QueryTypes.SELECT,
-    });
-    res.json(result);
-  } catch (err) {
-    console.error(err);
-    res.error("Server error");
-  }
-});
-
-const mealMapCustom = `SELECT hall_name,
-  hall_address,
-  hall_lat,
-  hall_long,
-  meal_name
-FROM
-  Meals m
-INNER JOIN Meals_Locations ml 
-  ON m.meal_id = ml.meal_id
-INNER JOIN Dining_Hall d
-ON d.hall_id = ml.hall_id;`;
-router.get("/map/data", async (req, res) => {
-  try {
-    const result = await db.sequelizeDB.query(mealMapCustom, {
-      type: sequelize.QueryTypes.SELECT,
-    });
-    res.json(result);
-  } catch (err) {
-    console.error(err);
-    res.error("Server error");
-  }
-});
-
-router.get('/custom', async (req, res) => {
-  try {
-    const result = await db.sequelizeDB.query(req.body.query, {
-      type: sequelize.QueryTypes.SELECT,
-    });
-    res.json(result);
   } catch (err) {
     console.error(err);
     res.error("Server error");

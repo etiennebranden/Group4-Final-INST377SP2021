@@ -84,35 +84,46 @@
           <br>
           <br>
           <br>
-            <label class="label">Search for the Air Pollution by City:</label>
-            <input class="input" type="text" placeholder="Text input">
-          <div class="field">
-            <br>
-            <br>
-              <label class="label">Select a category you want to change</label>
-              <div>
-                <div class="select">
-                  <select>
-                    <option>City</option>
-                    <option>Enviornment</option>
-                    <option>Demographic</option>
-                    <option>Political Party</option>
-                    <option>Development</option>
-                  </select>
-                </div>
-              </div>
-          </div>
-        </div>
+
+          <label class="label">Search for the Air Pollution by City:</label>
+          <form action="/api/pollution" id="recordSubmit">
+            <label for="03"></label>  
+            <input class="input" placeholder="Type a City Name" type="text" name="O3" id="O3">
+            <button class="button is-link" type="submit">Search</button>
+          </form>
+          <br>
+          <br>
+          <table class='table is-bordered is-striped is-narrow is-hoverable is-fullwidth'>
+            <thead>
+              <tr> 
+              <th>City Name</th>
+              <th>Population</th>
+              <th>Density</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+          <br>
+          <br>
+
         <div>
-            <button class="button is-link">Update Record</button>
-            <button class="button is-link">Delete Record</button>
-            <button class="button is-link">Add Record</button>
+            <input class="input" placeholder="Type a City Name" type="text" name="update" id="update">
+            <button class="button is-link">Update Pollution Record</button>
+            <br>
+            <input class="input" placeholder="Type a City Name" type="text" name="delete" id="delete">
+            <button class="button is-link">Delete Pollution Record</button>
+            <br>
+            <input class="input" placeholder="Type a City Name" type="text" name="add" id="add">
+            <button class="button is-link">Add Pollution Record</button>
+            <br>
         </div>
         <br>
         <span> 
-        <div class = "mapandchart" id='map'></div>
+        <div id="chartContainer1" style="height: 300px; width: 100%;"></div>
+        <div></div>
+        <div id="chartContainer2" style="height: 300px; width: 100%;"></div>
         <script src="script.js"></script>
-        <div class = "mapandchart" id="chartContainer"></div>
         </span>
         <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script> 
     </body>

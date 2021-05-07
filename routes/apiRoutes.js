@@ -59,7 +59,7 @@ router.post("/demo", async (req, res) => {
   }
 });
 
-router.delete("/demo/:hall_id", async (req, res) => {
+router.delete("/demo/:demo_id", async (req, res) => {
   try {
     await db.demo.destroy({
       where: {

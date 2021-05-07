@@ -1,3 +1,15 @@
+async function table() {
+  const cityRequest = await fetch("/api/city");
+  const cityData = await cityRequest.json();
+  cityData.data.forEach((city) => {
+    const tableLine = document.createElement('tr');
+    tableLine.innerHTML = `
+    <th>${city.city_name}</th>
+    <td>${city.city_population}</td>
+    <td>${city.pop_denstiy}</td>`;
+    tableBody.append(tableLine);
+  });
+}
 //getting data for form
 async function displaydata() {
   console.log('loaded window')
@@ -216,5 +228,6 @@ async function windowActions() {
   });
   chart1.render();
   chart2.render();
+  table();
 }
 window.onload = windowActions;

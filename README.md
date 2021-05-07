@@ -1,6 +1,22 @@
-# This is your readme
+<!-- # This is your readme
 You are required to fill it in with documentation similar to that found in the Sequelize example for the course as part of your final project.
 
 ### How to use Markdown
 Markdown is a text notation system used in Discord, Whatsapp and similar to structure pages without writing HTML at all. You'll be using it for your documentation.
-* [Markdown guide](https://www.markdownguide.org/cheat-sheet/)
+* [Markdown guide](https://www.markdownguide.org/cheat-sheet/) -->
+
+# Air Pollution Group Project
+
+## Description
+Air pulltion has been one of huge climate change issue, and people includes students, young and old generations want to learn more about it,  but it could be hard to undertsand. To address this issue, we developed a website that retrieve and manipulate data to easily gain a larger understanding on climate change. We tried to utilize a database on particle pollution with data ranging from Seoul to New South Wales. Our dataset is air quality levels worldwide to get better understanding of the various environmental factors that contribute to air quality in different countries.
+<img src="0100Home.png" alt="0100's Website Home">
+
+## Link to Website
+[https://vast-garden-63288.herokuapp.com/](https://vast-garden-63288.herokuapp.com/)
+
+## Target Browsers
+* Macbook, Macbook Pro 13/15
+
+## Links
+* [User Manual](https://scheduleofpt.herokuapp.com/documentation.html) 
+* [Developer Manual](https://github.com/jhersh4/finalproject377#developer-manual)

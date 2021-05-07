@@ -1,70 +1,53 @@
 async function table() {
   const cityRequest = await fetch("/api/city");
   const cityData = await cityRequest.json();
-  cityData.data.forEach((city) => {
-    const tableLine = document.createElement('tr');
-    tableLine.innerHTML = `
-    <th>${city.city_name}</th>
-    <td>${city.city_population}</td>
-    <td>${city.pop_denstiy}</td>`;
-    tableBody.append(tableLine);
-  });
+  return cityData;
 }
 //getting data for form
 async function displaydata() {
-  console.log('loaded window')
-  const form = document.querySelector('#recordSubmit');
-  const name = document.querySelector('#O3');
-  //const city = document.querySelector('#city_name');
+  console.log("loaded window");
+  const form = document.querySelector("#recordSubmit");
+  const name = document.querySelector("#O3");
+  const city = document.querySelector("#city_name");
 
-
-  form.addEventListener('submit', (e) => {
+  form.addEventListener("submit", (e) => {
     e.preventDefault();
-    console.info('submitted form', e.target);
-  })
-  const post = await fetch('/api/pollution', {
-    method: 'POST',
+    console.info("submitted form", e.target);
+  });
+  const post = await fetch("/api/pollution", {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify({O3: name.value}),
+    body: JSON.stringify({ O3: name.value }),
     //body: JSON.stringify({city_name: city.value})
-
   });
 
-    const id_inp = document.getElementById('O3');
-    const deleteForm = document.getElementById('delete')
-
+  const id_inp = document.getElementById("O3");
+  const deleteForm = document.getElementById("delete");
 
   // delete the record
-// listens for the delete button on the modal to be clicked
-  const deleteR = await fetch('/api/pollution'.concat(id_inp.value), {
-    method: 'DELETE',
-    headers: {
-    'Content-Type': 'application/json'
-
-  }
-
-
-    // Creates new div element for the modal
-  //const modal = document.createElement('div');
-  //modal.parentNode.removeChild(modal); // removes modal form the page
+  // listens for the delete button on the modal to be clicked
+  //const deleteR = await fetch('/api/pollution'.concat(id_inp.value), {
+  //method: 'DELETE',
+  //headers: {
+  //'Content-Type': 'application/json'
 }
 
-
-}
-
+// Creates new div element for the modal
+//const modal = document.createElement('div');
+//modal.parentNode.removeChild(modal); // removes modal form the page
 
 function getRandom(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
-async function getInfo() {
-  const cityRequest = await fetch("/api/city");
-  const cityData = await cityRequest.json();
-  return cityData;
-}
+//async function getInfo() {
+//const cityRequest = await fetch("/api/city");
+//const cityData = await cityRequest.json();
+//return cityData;
+//
 
 async function getPollution() {
   const pollutionRequest = await fetch("/api/pollution");
@@ -76,21 +59,28 @@ async function getPollution() {
 //Bar Chart
 async function windowActions() {
   displaydata();
-  
-  const data = await getInfo();
-  //const polldata = await getPollution();
-  const cityArray = [1, 2, 3, 4, 5,6,7,8,9,10];
+  const data = await table();
+  const polldata = await getPollution();
+  //City Table
+  const cityArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const selected = cityArray.map((element) => {
     const random = getRandom(0, data.length - 1);
     return data[random];
   });
   console.table(selected);
-  selected.forEach((check) => {
-    console.log(check);
+  const infoC = document.querySelector(".cityT");
+  selected.forEach((city) => {
+    console.log(city);
+    const tableLine = document.createElement("tr");
+    tableLine.innerHTML = `
+    <th>${city.city_name}</th>
+    <td>${city.city_population}</td>
+    <td>${city.pop_denstiy}</td>`;
+    infoC.append(tableLine);
+    console.log(tableLine);
   });
-
-  const polldata = await getPollution();
-  const pollArray = [1, 2, 3, 4, 5,6,7,8,9,10];
+  //Pollution Table
+  const pollArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const pselected = pollArray.map((air) => {
     const random = getRandom(0, polldata.length - 1);
     return polldata[random];
@@ -99,7 +89,6 @@ async function windowActions() {
   pselected.forEach((check2) => {
     console.log(check2);
   });
-
 
   var chart1 = new CanvasJS.Chart("chartContainer1", {
     animationEnabled: true,
@@ -128,8 +117,6 @@ async function windowActions() {
           { label: selected[7].city_name, y: selected[7].pop_denstiy },
           { label: selected[8].city_name, y: selected[8].pop_denstiy },
           { label: selected[9].city_name, y: selected[9].pop_denstiy },
-
-
         ],
       },
     ],
@@ -137,94 +124,96 @@ async function windowActions() {
 
   var chart2 = new CanvasJS.Chart("chartContainer2", {
     animationEnabled: true,
-    title:{
-      text: "Pollution"
+    title: {
+      text: "Pollution",
     },
     axisX: {
-      valueFormatString: ""
+      valueFormatString: "",
     },
     axisY: {
-      prefix: ""
+      prefix: "",
     },
     toolTip: {
-      shared: true
+      shared: true,
     },
-    data: [{
-      type: "stackedBar",
-      name: "O3",
-      showInLegend: "true",
-      xValueFormatString: "",
-      yValueFormatString: "",
-      dataPoints: [
-        { x: pselected[0].pollution_id, y: pselected[0].O3 },
-        { x: pselected[1].pollution_id, y: pselected[1].O3},
-        { x: pselected[2].pollution_id, y: pselected[2].O3},
-        { x: pselected[3].pollution_id, y: pselected[3].O3},
-        { x: pselected[4].pollution_id, y: pselected[4].O3},
-        { x: pselected[5].pollution_id, y: pselected[5].O3},
-        { x: pselected[6].pollution_id, y: pselected[6].O3},
-        { x: pselected[7].pollution_id, y: pselected[7].O3 },
-        { x: pselected[8].pollution_id, y: pselected[8].O3 },
-        { x: pselected[9].pollution_id, y: pselected[9].O3},
-      ]
-    },
-    {
-      type: "stackedBar",
-      name: "PM10",
-      showInLegend: "true",
-      xValueFormatString: "",
-      yValueFormatString: "",
-      dataPoints: [
-        { x: pselected[0].pollution_id, y: pselected[0].PM10 },
-        { x: pselected[1].pollution_id, y: pselected[1].PM10 },
-        { x: pselected[2].pollution_id, y: pselected[2].PM10 },
-        { x: pselected[3].pollution_id, y: pselected[3].PM10 },
-        { x: pselected[4].pollution_id, y: pselected[4].PM10 },
-        { x: pselected[5].pollution_id, y: pselected[5].PM10 },
-        { x: pselected[6].pollution_id, y: pselected[6].PM10 },
-        { x: pselected[7].pollution_id, y: pselected[7].PM10 },
-        { x: pselected[8].pollution_id, y: pselected[8].PM10 },
-        { x: pselected[9].pollution_id, y: pselected[9].PM10 },
-      ]
-    },
-    {
-      type: "stackedBar",
-      name: "SO2",
-      showInLegend: "true",
-      xValueFormatString: "",
-      yValueFormatString: "",
-      dataPoints: [
-        { x: pselected[0].pollution_id, y: pselected[0].SO2 },
-        { x: pselected[1].pollution_id, y: pselected[1].SO2 },
-        { x: pselected[2].pollution_id, y: pselected[2].SO2 },
-        { x: pselected[3].pollution_id, y: pselected[3].SO2 },
-        { x: pselected[4].pollution_id, y: pselected[4].SO2 },
-        { x: pselected[5].pollution_id, y: pselected[5].SO2 },
-        { x: pselected[6].pollution_id, y: pselected[6].SO2 },
-        { x: pselected[7].pollution_id, y: pselected[7].SO2 },
-        { x: pselected[8].pollution_id, y: pselected[8].SO2 },
-        { x: pselected[9].pollution_id, y: pselected[9].SO2 },
-      ]
-    },
-    {
-      type: "stackedBar",
-      name: "NO2",
-      showInLegend: "true",
-      xValueFormatString: "",
-      yValueFormatString: "",
-      dataPoints: [
-        { x: pselected[0].pollution_id, y: pselected[0].NO2 },
-        { x: pselected[1].pollution_id, y: pselected[1].NO2 },
-        { x: pselected[2].pollution_id, y: pselected[2].NO2 },
-        { x: pselected[3].pollution_id, y: pselected[3].NO2 },
-        { x: pselected[4].pollution_id, y: pselected[4].NO2 },
-        { x: pselected[5].pollution_id, y: pselected[5].NO2 },
-        { x: pselected[6].pollution_id, y: pselected[6].NO2 },
-        { x: pselected[7].pollution_id, y: pselected[7].NO2 },
-        { x: pselected[8].pollution_id, y: pselected[8].NO2 },
-        { x: pselected[9].pollution_id, y: pselected[9].NO2 },
-      ]
-    }]
+    data: [
+      {
+        type: "stackedBar",
+        name: "O3",
+        showInLegend: "true",
+        xValueFormatString: "",
+        yValueFormatString: "",
+        dataPoints: [
+          { x: pselected[0].pollution_id, y: pselected[0].O3 },
+          { x: pselected[1].pollution_id, y: pselected[1].O3 },
+          { x: pselected[2].pollution_id, y: pselected[2].O3 },
+          { x: pselected[3].pollution_id, y: pselected[3].O3 },
+          { x: pselected[4].pollution_id, y: pselected[4].O3 },
+          { x: pselected[5].pollution_id, y: pselected[5].O3 },
+          { x: pselected[6].pollution_id, y: pselected[6].O3 },
+          { x: pselected[7].pollution_id, y: pselected[7].O3 },
+          { x: pselected[8].pollution_id, y: pselected[8].O3 },
+          { x: pselected[9].pollution_id, y: pselected[9].O3 },
+        ],
+      },
+      {
+        type: "stackedBar",
+        name: "PM10",
+        showInLegend: "true",
+        xValueFormatString: "",
+        yValueFormatString: "",
+        dataPoints: [
+          { x: pselected[0].pollution_id, y: pselected[0].PM10 },
+          { x: pselected[1].pollution_id, y: pselected[1].PM10 },
+          { x: pselected[2].pollution_id, y: pselected[2].PM10 },
+          { x: pselected[3].pollution_id, y: pselected[3].PM10 },
+          { x: pselected[4].pollution_id, y: pselected[4].PM10 },
+          { x: pselected[5].pollution_id, y: pselected[5].PM10 },
+          { x: pselected[6].pollution_id, y: pselected[6].PM10 },
+          { x: pselected[7].pollution_id, y: pselected[7].PM10 },
+          { x: pselected[8].pollution_id, y: pselected[8].PM10 },
+          { x: pselected[9].pollution_id, y: pselected[9].PM10 },
+        ],
+      },
+      {
+        type: "stackedBar",
+        name: "SO2",
+        showInLegend: "true",
+        xValueFormatString: "",
+        yValueFormatString: "",
+        dataPoints: [
+          { x: pselected[0].pollution_id, y: pselected[0].SO2 },
+          { x: pselected[1].pollution_id, y: pselected[1].SO2 },
+          { x: pselected[2].pollution_id, y: pselected[2].SO2 },
+          { x: pselected[3].pollution_id, y: pselected[3].SO2 },
+          { x: pselected[4].pollution_id, y: pselected[4].SO2 },
+          { x: pselected[5].pollution_id, y: pselected[5].SO2 },
+          { x: pselected[6].pollution_id, y: pselected[6].SO2 },
+          { x: pselected[7].pollution_id, y: pselected[7].SO2 },
+          { x: pselected[8].pollution_id, y: pselected[8].SO2 },
+          { x: pselected[9].pollution_id, y: pselected[9].SO2 },
+        ],
+      },
+      {
+        type: "stackedBar",
+        name: "NO2",
+        showInLegend: "true",
+        xValueFormatString: "",
+        yValueFormatString: "",
+        dataPoints: [
+          { x: pselected[0].pollution_id, y: pselected[0].NO2 },
+          { x: pselected[1].pollution_id, y: pselected[1].NO2 },
+          { x: pselected[2].pollution_id, y: pselected[2].NO2 },
+          { x: pselected[3].pollution_id, y: pselected[3].NO2 },
+          { x: pselected[4].pollution_id, y: pselected[4].NO2 },
+          { x: pselected[5].pollution_id, y: pselected[5].NO2 },
+          { x: pselected[6].pollution_id, y: pselected[6].NO2 },
+          { x: pselected[7].pollution_id, y: pselected[7].NO2 },
+          { x: pselected[8].pollution_id, y: pselected[8].NO2 },
+          { x: pselected[9].pollution_id, y: pselected[9].NO2 },
+        ],
+      },
+    ],
   });
   chart1.render();
   chart2.render();

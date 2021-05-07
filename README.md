@@ -12,7 +12,7 @@ Markdown is a text notation system used in Discord, Whatsapp and similar to stru
 
 ## Description
 Air pulltion has been one of huge climate change issue, and people includes students, young and old generations want to learn more about it,  but it could be hard to undertsand. To address this issue, we developed a website that retrieve and manipulate data to easily gain a larger understanding on climate change. We tried to utilize a database on particle pollution with data ranging from Seoul to New South Wales. Our dataset is air quality levels worldwide to get better understanding of the various environmental factors that contribute to air quality in different countries.
-<img src="0100Home.png" alt="0100's Website Home">
+<!-- <img src="0100Home.png" alt="0100's Website Home"> -->
 
 ## Link to Website
 [https://vast-garden-63288.herokuapp.com/](https://vast-garden-63288.herokuapp.com/)

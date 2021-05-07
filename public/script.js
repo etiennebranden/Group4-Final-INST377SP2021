@@ -2,7 +2,9 @@
 async function displaydata() {
   console.log('loaded window')
   const form = document.querySelector('#recordSubmit');
-  const name = document.querySelector('#03');
+  const name = document.querySelector('#O3');
+  //const city = document.querySelector('#city_name');
+
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -13,8 +15,31 @@ async function displaydata() {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({O3: name.value})
+    body: JSON.stringify({O3: name.value}),
+    //body: JSON.stringify({city_name: city.value})
+
   });
+
+    const id_inp = document.getElementById('O3');
+    const deleteForm = document.getElementById('delete')
+
+
+  // delete the record
+// listens for the delete button on the modal to be clicked
+  const deleteR = await fetch('/api/pollution'.concat(id_inp.value), {
+    method: 'DELETE',
+    headers: {
+    'Content-Type': 'application/json'
+
+  }
+
+
+    // Creates new div element for the modal
+  //const modal = document.createElement('div');
+  //modal.parentNode.removeChild(modal); // removes modal form the page
+}
+
+
 }
 
 
@@ -38,6 +63,8 @@ async function getPollution() {
 // Database
 //Bar Chart
 async function windowActions() {
+  displaydata();
+  
   const data = await getInfo();
   //const polldata = await getPollution();
   const cityArray = [1, 2, 3, 4, 5,6,7,8,9,10];
@@ -189,6 +216,5 @@ async function windowActions() {
   });
   chart1.render();
   chart2.render();
-  displaydata();
 }
 window.onload = windowActions;

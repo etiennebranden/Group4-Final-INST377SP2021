@@ -6,16 +6,16 @@
         <title>Team 4: Air Pollution Group Project</title>
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-        <link href="~bulma-carousel/dist/css/bulma-carousel.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/css/bulma-carousel.min.css">
         <link rel="stylesheet" type="text/css" href="style.css">
         
     </head>
     <body>
       <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand" >
+        <div class="navbar-brand">
           <a class="navbar-item" href='index.html'>
-            <img src="0100Logo.png">
+            <img src="0100Logo.png" >
           </a>
       
           <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -47,20 +47,36 @@
                 <a class="navbar-item" href='contactUs.html'>
                   Contact Us
                 </a>
-              </div>
             </div>
           </div>
         </div>
       </nav>
-        <div class="moveLeftToCenter" id="fasterMove">
-          <h1>Air Pollution Group Project</h1>
-          <h2>By Team 0100</h2>
+      <section class="section">
+        <div class="container" id="forcaro">
+          <!-- Start Carousel -->
+          <div id="carousel-demo" class="carousel" >
+            <div class="item-1">
+              <!-- Slide Content -->
+              <img src="ap.png" >
+            </div>
+            <div class="item-2">
+              <!-- Slide Content -->
+              <img src="ap2.jpeg">
+            </div>
+            <div class="item-3">
+              <!-- Slide Content -->
+              <img src="ap3.jpeg">
+            </div>
+            <div class="item-4">
+              <!-- Slide Content -->
+              <img src="ap4.jpeg">
+            </div>
+          </div>
+          <!-- End Carousel -->
         </div>
-        <div class="moveLeftToCenter">
-        <figure class="image is-3by1">
-          <img src="ap.png">
-        </figure>
-        </div>
+      </section>
+      <h1>Air Pollution Group Project</h1>
+      <h2>By Team 0100</h2>
         <br>
         <br> 
         <br>
@@ -122,7 +138,20 @@
             <br>
           </ul>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/js/bulma-carousel.min.js"></script>
         <script src="script.js"></script>
-        <script src="~bulma-carousel/dist/js/bulma-carousel.min.js"></script>
+        <script>
+          bulmaCarousel.attach('#carousel-demo', {
+            slidesToScroll: 1,
+            slidesToShow: 1,
+            pagination: false,
+            navigation: true,
+            loop: true,
+            autoplay: true,
+            duration: 2000,
+            autoplaySpeed: 3500,
+            pauseOnHover: false
+          });
+        </script>
     </body>
 </html>

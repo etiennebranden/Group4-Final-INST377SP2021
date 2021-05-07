@@ -18,11 +18,13 @@ Air pulltion has been one of huge climate change issue, and people includes stud
 [https://vast-garden-63288.herokuapp.com/](https://vast-garden-63288.herokuapp.com/)
 
 ## Target Browsers
-* Macbook, Macbook Pro 13/15
+* Macbook 13", Macbook Pro 13"/15"
+* Notebook 13"/15"
+* Desktop 19"/20"/22"/23"/24"
 
-## Links
-* [User Manual](https://scheduleofpt.herokuapp.com/documentation.html) 
-* [Developer Manual](https://github.com/jhersh4/finalproject377#developer-manual)
+## Link to Developer Manual
+* [Developer Manual](https://github.com/etiennebranden/Group4-Final-INST377SP2021/blob/main/README.md#developer-manual)
+
 
 # Developer Manual
 
